@@ -3,7 +3,7 @@
       "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>QB recommendations</title>
+  <title>Statistics on the Web Best Practices</title>
   <link rel="stylesheet" type="text/css" href="./css/base.css" />
   <link rel="stylesheet" type="text/css" href="./css/ezweb.css" />
   
@@ -13,32 +13,36 @@
 
 <body>
 
-<h1 id="title">QB recommendations</h1>
+<h1 id="title">Statistics on the Web Best Practices</h1>
 
-<!--<h2 id="subtitle">CanCO Ontology</h2>-->
 
 <h2 id="mymw-doctype">Working Draft - 12 July 2017</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
-      href="http://www.granatum.org/ontology/spec-20120517">XXX</a>
+      href="https://islab-uom.github.io/qbBestPractices/">https://islab-uom.github.io/qbBestPractices/</a>
     </dd>
   <dt>Latest version:</dt>
     <dd><a
-      href="http://www.granatum.org/ontology/spec-20120517">YYY</a>
+      https://islab-uom.github.io/qbBestPractices/">https://islab-uom.github.io/qbBestPractices/</a>
     </dd>
   <dt>Last Update:</dt>
-    <dd>Date: 17/05/2012</dd>
+    <dd>Date: 12/07/2017</dd>
   <dt>Authors:</dt>
-    <dd>Dimitris Zeginis, CERTH</dd>
-    <dd>Evangelos Kalampokis, CERTH</dd>
-	<dd>Giorgos Kopanidis, CERTH</dd>
-  <dt>Editors:</dt>
-    <dd>XXX, YYY</dd>
-   <dt>Contributors:</dt>
-    <dd>XXX</dd>
+    <dd><a href="http://kalampok.is">Evangelos Kalampokis</a>, University of Macedonia, Greece and CERTH/ITI</dd>
+    <dd>Dimitris Zeginis, CERTH/ITI</dd>
+  <dt>Contributors:</dt>
+   	<dd>Sarven Capadisli</dd>
+    <dd>Oscar Corcho</dd>
+    <dd>Franck Cotton</dd>
+    <dd>Adrian Gschwend</dd>
+    <dd>Paul Hermans</dd>
+    <dd>Andrei Melis</dd>
+    <dd>Dave Reynolds</dd>
+    <dd>Bill Roberts</dd>
+    <dd>Luca Valentino</dd>
   <dt>Acknowledgements:</dt>
-    <dd>See <a href="#acknowledgments">acknowledgements</a></dd>
+    <dd>This work was partially funded by the European Commission within the H2020 Program in the context of the <a href="http://opengovintelligence.eu/">OpenGovIntelligence</a> project under grand agreement No. 693849 <a></dd>
 </dl>
 
 <p class="copyright">Copyright © 2017.... This work is licensed under XXX, </p>
@@ -48,13 +52,35 @@
 
 <h2 id="abstract">Abstract</h2>
 
-<p> Abstra goes here</p>
+<p>This document presents a set of best practices for publishing statistics on the Web following the linked data principles. These practices aim at (a) supporting data publishers
+to model their data and (b) facilitating them to apply common linked data standards. The wide adoption of such practices can increase interoperability among various sources of statistics 
+on the Web, and thus facilitate the integration of related statistics from different portals as well as the development of generic software tools that can be reused across different datasets.
+
+  </p>
 
 <h2 id="status">Status of this Document</h2>
 
-<p><strong>This is a work in progress!</strong> This document is changing on a
-daily if not hourly basis. Comments are very welcome, please send them to the
-authors. Thank you. </p>
+<p>The aim of this document is to trigger and contribute to a discussion on the development of a set of best practices for publishing statistics on the Web. 
+It describes the results of a research work conducted by CERTH in the course of the OpenGovIntelligence project.</p> 
+
+<p>The approach that was followed comprises two steps:
+<ul> 
+<li>an analysis of official linked statistical data portals (i.e. to identify conflicting publishing approaches, and </li>
+<li>the involvement of experts to provide their feedback and contribute to the comprehension of the publishing approaches as well as to the definition of the best practices. Towards 
+this direction the Delphi method was employed using a questionnaire with multiple iterations to collect feedback until a stability in the responses was attained </li>
+</ul>
+
+However, a set of open issues still remain to be explored.
+
+The Scottish Government\footnote{statistics.gov.scot} provides the official data on ``Neighborhood Statistics'' as linked statistical data. They offer 127 cubes categorized to 17 themes (e.g. housing, transport). The UK Department for Communities and Local Government (DCLG)\footnote{opendatacommunities.org} provides data of a selection of statistics including local government finance and housing and homelessness. They offer 208 cubes categorized to 14 themes (e.g. homelessness, societal well-being).  The Flemish Government\footnote{data.opendataforum.info} makes available some of their data as linked statistical data. Specifically, 11 cubes have been published through the OpenCube project\footnote{http://opencube-project.eu/} with the official permission and contribution of the Flemish Government. The European Commission’s Digital Agenda\footnote{digital-agenda-data.eu/data}  provides its Scoreboard as linked statistical data organized to 4 cubes. Finally, two censuses have been published as linked statistical data: i) the Italian Census 2011 published by the Italian National Institute of Statistics (ISTAT)\footnote{datiopen.istat.it} and organized at 8 cubes and ii) the Irish Census\footnote{data.cso.ie}
+
+
+ </p>
+
+<p>
+This document describes best practices 
+Comments are very welcome, please send them to the
+authors.</p>
 
 <h2 id="contents">Table of Contents</h2>
 <ol id="toc">
@@ -79,7 +105,12 @@ authors. Thank you. </p>
 
 <h2 id="intro">1. Introduction</h2>
 
-<p> Into goes here </p>
+<p>International organizations, National Statistical Institutes, and public authorities are increasingly opening up their statistical data through Web portals for others to reuse. 
+Recently, many of these portals (e.g. the Italian and Irish National Statistical Institutes portals, the Flemish Government portal and the Scottish Government portal)  
+have adopted the linked data principles that facilitates data integration on the Web through the reuse of standard Web technologies such as HTTP, RDF and URIs and standard vocabularies such as RDF data cube, SKOS and XKOS. 
+However, the flexibility of these standards enables statistical data portals to follow different publishing approaches, thus causing interoperability conflicts. 
+The result is the creation of linked statistical data silos that hamper the integration and combination of related statistical data from different portals as wells as the development of generic exploitation tools (e.g. visualizations) 
+that can be reused across different portals. </p>
 
 
 <h2 id="audience">2. Audience</h2>
