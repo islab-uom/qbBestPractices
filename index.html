@@ -351,7 +351,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
     <p><u>BP2.4: Use URIs from the QUDT units vocabulary.</u> It is the more complete vocabulary, however if QUDT is not sufficient, then DBpedia or code lists can be used.</p>
     <p>Example:</p>
     <aside class="example">
-			<img src="images/bp2.jpg" width=500>
+			<img src="images/bp2.jpg" width=800>
 			<pre>
  :unemployment a qb:MeasureProperty. 
  :dsd a qb:DataStructureDefinition;
@@ -390,7 +390,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		<h4 class="subhead" id="bp-3" resource="#bp-3"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
     <p><u>BP3.1: Publish one cube with multiple units and define the unit at each qb:Observation.</u> Conceptually it is preferable to have all related units of the same measure at the same cube. In case that query optimization of available units is required, then define the units also at the qb:DataSet. For example:</p>
   <aside class="example">
-			<img src="images/bp3.jpg" width=500>
+			<img src="images/bp3.jpg" width=800>
 			<pre>
  :unemployment a qb:MeasureProperty. 
  :dsd a qb:DataStructureDefinition;
@@ -497,7 +497,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
     <p><u>BP4.2: In case you model multiple measures at one cube then use the measure dimension approach (i.e. observations with a single measure) and define the unit at each observation (as already explained at BP3).</u></p>
     <p>Example:</p>
   <aside class="example">
-			<img src="images/bp4.jpg" width=500>
+			<img src="images/bp4.jpg" width=800>
 			<pre>
  :unemployment a qb:MeasureProperty. 
  :poverty a qb:MeasureProperty. 
@@ -552,7 +552,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		<h4 class="subhead" id="bp-5" resource="#bp-5"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
     <p><u>BP5.1 (Applies to time, geography and age): Define a new dimension that is also sub-property of the corresponding SDMX dimension. Define the valid potential values of the new dimension (see BP6 and BP7).</u></p>
   <aside class="example">
-			<img src="images/bp5.1.jpg" width=500>
+			<img src="images/bp5.1.jpg" width=800>
 			<pre>
  :geo a qb:DimensionProperty;
       rdfs:subPropertyOf  sdmx-dimension:refArea.
@@ -562,7 +562,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		</aside>
     <p><u>BP5.2 (Applies to gender): Re-use the sdmx-dimension:sex when the associated code list covers the modeling needs. If it does not cover the modeling needs, then define a new dimension and its valid potential values (see BP6 and BP7)</u></p>
     <aside class="example">
-			<img src="images/bp5.2.jpg" width=500>
+			<img src="images/bp5.2.jpg" width=800>
 			<pre>
  :dsd a qb:DataStructureDefinition;
       qb:component [qb:dimension sdmx-dimension:sex].
@@ -589,7 +589,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		<h4 class="subhead" id="bp-6" resource="#bp-6"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
     <p><u>BP6.1: Always define the rdfs:range of a qb:DimensionProperty.</u></p>
   <aside class="example">
-			<img src="images/bp6.1.jpg" width=500>
+			<img src="images/bp6.1.jpg" width=800>
 			<pre>
   :d a qb:DimensionProperty;
         rdfs:range xsd:dateTime.
@@ -599,7 +599,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		</aside>
     <p><u>BP6.2: Define the qb:codeList of a qb:DimensionProperty when the code list is modeled as skos:ConceptScheme or skos:Collection  or  qb:HierarchicalCodeList.</u> In this case define the rdfs:range as skos:Concept. (for the way to define a new code list see BP9)</p>
     <aside class="example">
-			<img src="images/bp6.2.jpg" width=500>
+			<img src="images/bp6.2.jpg" width=800>
 			<pre>
   :d a qb:DimensionProperty;
           rdfs:range skos:Concept;
@@ -645,7 +645,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		<h4 class="subhead" id="bp-7" resource="#bp-7"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
     <p><u>BP7.1a: In case you need to describe a specific point in time then define a new dimension that is also sub-property of sdmx-dimension:refPeriod and set as rdfs:range xsd:date.</u></p>
   <aside class="example">
-			<img src="images/bp7.1.a.jpg" width=500>
+			<img src="images/bp7.1.a.jpg" width=800>
 			<pre>
   :time a qb:DimensionProperty;
           rdfs:subPropertyOf  sdmx-dimension:refPeriod;
@@ -656,7 +656,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		</aside>
     <p><u>BP7.1b: In case you need to describe a period of time then define a new dimension that is also sub-property of sdmx-dimension:refPeriod and set as rdfs:range the interval:Interval</u> (reference.data.gov.uk uses Intervals to define years). However if reference.data.gov.uk   is not sufficient, then a code lists can also be used (see BP9).</p>
     <aside class="example">
-			<img src="images/bp7.1.b.jpg" width=500>
+			<img src="images/bp7.1.b.jpg" width=800>
 			<pre>
   :time a qb:DimensionProperty;
           rdfs:subPropertyOf  sdmx-dimension:refPeriod;
@@ -667,7 +667,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		</aside>
     <p><u>BP7.2 (Applies to geography and age): Define a new dimension that is also sub-property of the sdmx-dimension:refArea or sdmx-dimension:age respectively. Define the rdfs:range and/or qb:codeList of this dimension (see BP6). If a code list or reference dataset that covers the modeling needs exists, then it should be re-used. Otherwise a new code list should be created (see BP9).</u></p>
     <aside class="example">
-			<img src="images/bp7.2.jpg" width=500>
+			<img src="images/bp7.2.jpg" width=800>
 			<pre>
   :geo a qb:DimensionProperty;
          rdfs:subPropertyOf  sdmx-dimension:refArea;
@@ -699,7 +699,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
     <p><u>BP8.1: Always include the single value of a dimensions at each qb:Observation.</u></p>
     <p>Example</p>
   <aside class="example">
-			<img src="images/bp8.jpg" width=500>
+			<img src="images/bp8.jpg" width=800>
 			<pre>
   :obs1 a qb:Observation;
         sdmx-dimension:sex sdmx-code:sex-M;
