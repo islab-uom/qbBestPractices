@@ -378,12 +378,12 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-3" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-3" resource="#ch-3"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
-    <p>John realizes that the data he wants to publish contain unemployment both as a percentage and as an absolute number, so he needs to include both units. Now he is wondering: i) whether to include both units at the same cube or define separate cubes for each unit and ii) where to define the unit e.g. at the structure or at the observation.
+    <p>It is a common practice to have data with multiple units for the same measure (e.g. percentage and absolute number for unemployment). In this case there are two modeling approaches that can be followed and are valid according to the QB vocabulary:</p>
       <ul>
         <li>Include all units at one cube</li>
         <li>Publish multiple cubes with one unit each</li>
       </ul></p>
-     <p>John realizes that the data he wants to publish contain unemployment both as a percentage and as an absolute number, so he needs to include both units. Now he is wondering: i) whether to include both units at the same cube or define separate cubes for each unit and ii) where to define the unit e.g. at the structure or at the observation.</p>
+     <p>The selection of the approach to be followed is affected by the level where the unit is defined as described in challenge 2.3. For example, if multiple units for the same measure are defined at the qb:DataSet, then there is no way to map the units with the values at the qb:Observation. Thus, the definition of multiple units at the qb:DataSet should be avoided.</p>
     </section>
 	
 	<section class="axioms" typeof="bibo:Chapter" resource="#bp-3" property="bibo:hasPart">
@@ -412,6 +412,129 @@ John works for the National Statistical Institute of Belgium and is in charge of
 	</section>
 </div>
 <!-- END BP3 -->
+
+<!-- BP4 -->
+<div class="practice">
+	<p><span id="DefiningMultipleMeasures" class="practicelab">BP4: Defining multiple measures</span></p>
+    <p class="practicedesc">John wants to publish also data about poverty in Belgium. John is wondering whether to publish the data about unemployment and poverty at the same cube or publish separate cubes. In the case that both measures are included at the same cube, he is also wondering what is the best way to do so, considering that the measures have multiple units (percentage and absolute number).</p>
+
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-4" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-4" resource="#ch-4"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
+    <p>It is a common practice to have data with multiple measures (e.g. unemployment and poverty). In this case, there are two modeling approaches that can be followed and are valid according to the QB vocabulary:
+      <ul>
+        <li>Publish multiple cubes with one measure each </li>
+        <li>Include all measures at one cube </li>
+      </ul></p>
+     <p>The first approach is covered by BP2 (measure with one unit) and at BP3 (measure with multiple units).</p>
+     <p>Considering the second approach (multiple measures at one cube), the QB vocabulary proposes two practices to represent multiple measures: </p>
+     <p><u>Multi-measure observations:</u> Define multiple qb:MeasureProperty at the data structure definition and use all measures to every qb:Observation. By defining all the measures at one observation, this practice reduces the size of the produced cube. However, a limitation of this practice is that it does not allow the association of an attribute property (e.g. unit) to a single measurement. An attribute property attached to the observation will apply to all measurements, thus it cannot represent multiple measures with multiple units.</p> 
+     <aside class="example">
+			<pre>
+ :unemployment a qb:MeasureProperty. 
+ :poverty a qb:MeasureProperty. 
+ :dsd a qb:DataStructureDefinition;
+                qb:component [qb:measure :unempolyment];
+                qb:component [qb:measure :poverty].
+ :cube a qb:DataSet;
+                qb:structure :dsd.
+ :obs1 a qb:Observation;
+                qb:dataset :cube.
+                :unemployment "89600"^^xsd:int;
+                :poverty "153000"^^xsd:int. 
+
+			</pre>			
+		</aside>
+    <p><u>Measure dimension:</u> Define multiple qb:MeasureProperty at the data structure definition, but restrict observations to having a single measure. This is achieved by defining an extra dimension, the qb:measureType, to denote which particular qb:MeasureProperty is included at the qb:Observation. The use of a single measure at observations produces a large number of observations, thus increasing the size of the produced cube. However, this practice enables the definition of multiple units and multiple measures.</p>
+    <aside class="example">
+			<pre>
+  :unemployment a qb:MeasureProperty. 
+  :poverty a qb:MeasureProperty. 
+  :dsd a qb:DataStructureDefinition;
+            qb:component [qb:measure :unempolyment];
+            qb:component [qb:measure :poverty];
+            qb:component [qb:dimension qb:measureType].
+  :cube a qb:DataSet;
+            qb:structure :dsd.
+  :obs1 a qb:Observation;
+            qb:dataset :cube.
+            :unemployment "89600"^^xsd:int;
+            qb:measureType :unemployment. 
+  :obs2 a qb:Observation;
+            qb:dataset :cube.
+            :poverty "153000"^^xsd:int;
+            qb:measureProperty :poverty.
+			</pre>			
+		</aside>
+    <p>Comparison matrix of the practices to represent multiple measures:</p>
+    <table border="1">
+  <tr>
+    <th></th>
+    <th><b>Multi-measure observations</b></th> 
+    <th><b>qb:Measure dimension</b></th>
+  </tr>
+  <tr>
+    <td>Size</td>
+    <td>Small</td>
+    <td>Large</td>
+  </tr>
+  <tr>
+    <td>Support of multiple units and  measures</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>Support of multiple measures with the same unit</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+</table>
+    </section>
+	
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-4" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-4" resource="#bp-4"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+    <p>If the data have multiple measures, then it common to publish cubes with multiple measures only when measures are closely related to a single observational event. However, the approach to be followed is up to the data cube publisher.</p>
+    <p><u>BP4.1: In case you model multiple measures at multiple cubes with one measure each, then see i) BP2 if the measure has one unit or ii) BP3 if the measures has multiple units.</u></p>
+    <p><u>BP4.2: In case you model multiple measures at one cube then use the measure dimension approach (i.e. observations with a single measure) and define the unit at each observation (as already explained at BP3).</u></p>
+    <p>Example:</p>
+  <aside class="example">
+			<img src="images/bp4.jpg" width=500>
+			<pre>
+ :unemployment a qb:MeasureProperty. 
+ :poverty a qb:MeasureProperty. 
+ :dsd a qb:DataStructureDefinition;
+                  qb:component [qb:measure :unemployment];
+                  qb:component [qb:measure :poverty];
+                  qb:component [qb:dimension qb:measureType]
+                  qb:component [qb:attribute sdmx-attribute:unitMeasure].
+ :cube a qb:DataSet;
+                  qb:structure :dsd.
+ :obs1 a qb:Observation;
+                  qb:dataset :cube.
+                  :unemployment "16.8"^^xsd:decimal;
+                  qb:measureType :unemployment;
+                  sdmx-attribute:unitMeasure qudt:Percent.
+ :obs2 a qb:Observation;
+                  qb:dataset :cube;
+                  :unemployment  "89600"^^xsd:int;    
+                  qb:measureType :unemployment;
+                  sdmx-attribute:unitMeasure qudt:Person.
+ :obs3 a qb:Observation;
+                  qb:dataset :cube;
+                  :poverty  "153000"^^xsd:int;    
+                  qb:measureType:poverty;
+                  sdmx-attribute:unitMeasure qudt:Person.
+			</pre>			
+		</aside>
+	</section>
+  <section class="axioms" typeof="bibo:Chapter" resource="#open-4" property="bibo:hasPart">
+		<h4 class="subhead" id="open-4" resource="#open-4"><span property="xhv:role" resource="xhv:heading">Open issues</span></h4>
+		<ul>
+			<li>•	Should a cube have one or multiple measures?</li>
+			<li>•	How to index multiple units for multiple measures at BP4.2?</li>
+		</ul>
+	</section>	
+</div>
+<!-- END BP4 -->
 
 
 
