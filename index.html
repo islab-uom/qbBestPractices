@@ -229,33 +229,115 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP2 -->
 <div class="practice">
-	<p><span id="definingTheUnit" class="practicelab">BP2: Defining thr unit</span></p>
+	<p><span id="definingTheUnit" class="practicelab">BP2: Defining the unit</span></p>
     <p class="practicedesc">John has already defined unemployment as the measure of his cube. Now he is wondering a) whether or not to include the unit of the measure in the cube, 
       b) what RDF property to use to define the unit c) where to define the unit and d) what values to assign.</p>
 
-    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-XXX" property="bibo:hasPart">
-		<h4 class="subhead" id="ch-XXX" resource="#ch-XXX"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
-		
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-2.1" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-2.1" resource="#ch-2.1"><span property="xhv:role" resource="xhv:heading">Challenge 2.1</span></h4>
+    <p>The measure on its own is a plain numerical value. To correctly interpret this value we need to define the unit i.e. the quantity or increment by which the measure is counted or described. However, it is a common practice to not use units of measure (e.g. the portal of the Italian National Institute of Statistics http://datiopen.istat.it/). </p>
+    </section>
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-2.2" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-2.2" resource="#ch-2.2"><span property="xhv:role" resource="xhv:heading">Challenge 2.2</span></h4>
+    <p>At the QB vocabulary, units can be modeled as RDF properties of qb:AttributeProperty type that are defined at the cube structure (qb:DataStructureDefinition). The selection of the unit property may lead to synonym conflicts since different properties can be used for the same purpose. A common practice to address this challenge is to re-use sdmx-attribute:unitMeasure property. In practice however, new properties are defined as sub-properties of sdmx-attribute:unitMeasure hindering this way interoperability. For example, many existing portal follow this approach: </p>
 		<aside class="example">
-			<img src="images/bp1.1.jpg" width=500>
 			<pre>
- XXX       
+ :unit a qb:AttributeProperty;
+         rdfs:subPropertyOf sdmx-attribute:unitMeasure.
+ :dsd a qb:DataStructureDefinition;
+         qb:component [qb:attribute :unit].     
 			</pre>			
 		</aside>		
     </section>
-	
-	<section class="axioms" typeof="bibo:Chapter" resource="#bp-XXX" property="bibo:hasPart">
-		<h4 class="subhead" id="bp-XXX" resource="#bp-XXX"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
-			
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-2.3" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-2.3" resource="#ch-2.3"><span property="xhv:role" resource="xhv:heading">Challenge 2.3</span></h4>
+    <p>The QB vocabulary enables the definition of units at different levels i.e. at the qb:DataSet, at the qb:MeasureProperty and at the qb:Observation. By default units are assigned to qb:Observations, however using the property qb:componentAttachment different levels can also be used. In particular the options are:</p>
+    <p><u>Define the unit at the qb:DataSet.</u> In this case the querying of available units is facilitated since units can easily be identified directly from the structure of the cube. However, if multiple units are defined at the same cube, then there is no way to map the unit with the values at the qb:Observation. Another disadvantage of this approach is that qb:Observations cannot easily be re-used at another context, because they do not contain all the relevant information i.e. the unit is missing.</p>
+		<aside class="example">
+			<pre>
+ :unemployment a qb:MeasureProperty.
+ :dsd a qb:DataStructureDefinition;
+         qb:component [qb:attribute  sdmx-attribute:unitMeasure;
+                       qb:componentAttachment qb:DataSet];
+         qb:component [qb:measure  :unemployment].
+ :cube a qb:DataSet;
+           qb:structure :dsd;
+         <b>sdmx-attribute:unitMeasure qudt:Percent.</b> 
+			</pre>			
+		</aside>
+    <p><u>Define the unit at the qb:MeasureProperty.</u> In this case the querying of available units is also facilitated since units can be identified directly from the structure. Moreover, multiple units can be assigned at a cube. However, different qb:MeasureProperty should be defined for different units although they represent the same measure, thus hindering interoperability e.g. two separate qb:MeasureProperty should be defined for unemployment, one assigned to percentage and another assigned to the absolute number. In this case qb:Observations cannot easily be re-used at another context, because they do not contain all the relevant information i.e. the unit is missing.</p>
+    <aside class="example">
+			<pre>
+ :unemploymentPerc a qb:MeasureProperty;
+            <b>sdmx-attribute:unitMeasure qudt:Percent.</b>
+ :dsd a qb:DataStructureDefinition;
+         qb:component [qb:attribute  sdmx-attribute:unitMeasure;
+                       qb:componentAttachment qb:MeasureProperty];
+         qb:component [qb:measure  :unemploymentPerc].
+			</pre>			
+		</aside>
+    <p><u>Define the unit at the qb:Observation.</u> In this case multiple units can be assigned to a cube and there is no need to define different qb:MeasureProperty for different units. Moreover, qb:Observations can be re-used at another context since they contain all relevant information. However, the querying of the available units is not efficient because the query should iterate over all qb:Observation.</p>
+    <aside class="example">
+			<pre>
+ :unemployment a qb:MeasureProperty.
+ :dsd a qb:DataStructureDefinition;
+                qb:component [qb:attribute  sdmx-attribute:unitMeasure];
+                qb:component [qb:measure  :unemployment].
+ :cube a qb:DataSet;
+                qb:structure :dsd.
+ :obs1 a qb:Observation;
+                qb:dataset :cube.
+                unemployment: "16.8"^^xsd:decimal;
+             <b>sdmx-attribute:unitMeasure qudt:Percent.</b>
+			</pre>			
+		</aside>
+    <p>Comparison matrix of the levels to define the unit:</p>
+    +++++++++++++
+    </section>
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-2.4" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-2.4" resource="#ch-2.4"><span property="xhv:role" resource="xhv:heading">Challenge 2.4</span></h4>
+    <p>The values of the unit property (e.g. percentage) can be expressed using predefined URIs (e.g. http://qudt.org/vocab/unit#Percent). However, the use of different URIs to express the same unit creates synonym conflicts e.g. both http://qudt.org/vocab/unit#Percent and http://statistics.gov.scot/def/concept/measure-units/percentage define percentage.  </p>
+    <p>Three approaches are commonly used to express the unit values:</p>
+    <ol>
+      <li>Use URIs from the QUDT units vocabulary</li>
+      <li>Use URIs from DBpedia</li>
+      <li>Define a new code list</li>
+    </ol>
+    <p>All approaches are equally used by existing official portals. However, DBpedia is only used for currency units (e.g. http://dbpedia.org/resource/Pound_sterling).</p>
+    <p>As a result the challenges related to units are the following:</p>
+    <ul>
+      <li>Should we include the unit of the measure in the cube?</li>
+      <li>How to define a unit property?</li>
+      <li>Where to define the unit?</li>
+      <li>Which URIs to use for the unit values?</li>
+    </ul>
+    </section>
+
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-2" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-2" resource="#bp-2"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+    <p><u>BP2.1: Always include units of measures.</u> The measure on its own is a plain numerical value. To correctly interpret this value we need to include the unit.</p>
+    <p><u>BP2.2: Re-use the sdmx-attribute:unitMeasure.</u> This attribute can be used directly to assign values that are not part of a code list (e.g. QUDT). However, when annotation with additional properties (e.g. labels, code-list etc) is required, then new units that are also sub-properties of sdmx-attribute:unitMeasure should be defined.</p>
+    <p><u>BP2.3: Define the unit at qb:Observation.</u> In case that query optimization of available units is required, then define the units also at the qb:DataSet.</p>
+    <p><u>BP2.4: Use URIs from the QUDT units vocabulary.</u> It is the more complete vocabulary, however if QUDT is not sufficient, then DBpedia or code lists can be used.</p>
+    <p>Example:</p>
+    <aside class="example">
+			<img src="images/bp2.jpg" width=500>
+			<pre>
+ :unemployment a qb:MeasureProperty. 
+ :dsd a qb:DataStructureDefinition;
+                  qb:component [qb:attribute sdmx-attribute:unitMeasure];
+                  qb:component [qb:measure :unemployment].
+ :cube a qb:DataSet;
+                  qb:structure :dsd.
+ :obs1 a qb:Observation;
+                  qb:dataset :cube.
+                  :unemployment "16.8"^^xsd:decimal;
+                  sdmx-attribute:unitMeasure qudt:Percent.
+
+			</pre>			
+		</aside>	
 	</section>
-	
-	
-	<section class="axioms" typeof="bibo:Chapter" resource="#open-XXX" property="bibo:hasPart">
-		<h4 class="subhead" id="open-XXX" resource="#open-XXX"><span property="xhv:role" resource="xhv:heading">Open issues</span></h4>
-		<ul>
-			<li>XXX.</li>			
-		</ul>
-	</section>	
+	</section>
 </div>
 <!-- END BP2 -->
 
