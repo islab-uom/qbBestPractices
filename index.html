@@ -536,6 +536,42 @@ John works for the National Statistical Institute of Belgium and is in charge of
 </div>
 <!-- END BP4 -->
 
+<!-- BP5 -->
+<div class="practice">
+	<p><span id="DefiningDimensionProperties" class="practicelab">BP5: Defining dimension properties</span></p>
+    <p class="practicedesc">John has already defined the measures and the units of his cube. Now he needs to define the dimensions including time, geography, age and gender. He is wondering what RDF properties to use for the dimensions.</p>
+
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-5" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-5" resource="#ch-5"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
+    <p>Dimensions (e.g. geography, time) provide contextual information for the measures of the cube. At the QB vocabulary, dimensions are RDF properties of qb:DimensionProperty type and are defined at the cube structure (qb:DataStructureDefinition). The selection of the RDF property to represent a dimension may lead to synonym conflicts since different properties can be used for the same purpose. A common practice to address this challenge is to re-use dimensions defined by the linked data version of SDMX (e.g. sdmx-dimension:refArea)</p>
+    <p>The time, geography, age and gender dimensions are very common at statistical data, thus the linked data version of SDMX has already defined qb:DimensionProperties to express them i.e. sdmx-dimension:refPeriod, sdmx-dimension:refArea, sdmx-dimension:age and sdmx-dimension:sex. These SDMX dimensions are not associated with the valid potential values (i.e. code list or range). A special case is the sdmx-dimension:sex dimension because a code list has already been defined and associated with the dimension.</p>
+    <p>In practice however, new dimensions are defined as sub-properties of the SDMX dimensions hindering this way interoperability. An advantage of this approach is the fact that it enables the addition of extra annotation to the dimensions (e.g. label, code list, range).</p>
+    </section>
+	
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-5" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-5" resource="#bp-5"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+    <p><u>BP5.1 (Applies to time, geography and age): Define a new dimension that is also sub-property of the corresponding SDMX dimension. Define the valid potential values of the new dimension (see BP6 and BP7).</u></p>
+  <aside class="example">
+			<img src="images/bp5.1.jpg" width=500>
+			<pre>
+ :geo a qb:DimensionProperty;
+      rdfs:subPropertyOf  sdmx-dimension:refArea.
+ :dsd a qb:DataStructureDefinition;
+      qb:component [qb:dimension :geo].
+			</pre>			
+		</aside>
+    <p><u>BP5.2 (Applies to gender): Re-use the sdmx-dimension:sex when the associated code list covers the modeling needs. If it does not cover the modeling needs, then define a new dimension and its valid potential values (see BP6 and BP7)</u></p>
+    <aside class="example">
+			<img src="images/bp5.2.jpg" width=500>
+			<pre>
+ :dsd a qb:DataStructureDefinition;
+      qb:component [qb:dimension sdmx-dimension:sex].
+			</pre>			
+		</aside>  
+	</section>
+</div>
+<!-- END BP5 -->
+
 
 
 
