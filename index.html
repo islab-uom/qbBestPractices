@@ -728,7 +728,63 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 
 <h2 id="alternatives">A Alternative practices</h2>
+<!-- BP3 -->
+<div class="practice">
+	<p><span id="DefiningMultipleUnitsPerMeasure" class="practicelab">BP3: Defining multiple units per measure</span></p>
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-3" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-3alt" resource="#ch-3alt"><span property="xhv:role"</span></h4>
+    <p><u>Alternative 1: Publish multiple cubes with one unit and define the unit at the qb:DataSet.</u> For example:</p>
+    <aside class="example">
+			<img src="images/bp3.1alt.jpg" width=800>
+			<pre>
+ :unemployment a qb:MeasureProperty.
+ :dsd1 a qb:DataStructureDefinition;
+           qb:component [qb:attribute  sdmx-attribute:unitMeasure;
+                        qb:componentAttachment qb:DataSet];
+          qb:component [qb:measure  :unemployment].
+ :cube1 a qb:DataSet;
+           qb:structure :dsd1;
+           sdmx-attribute:unitMeasure qudt:Percent.
+ :obs1 a qb:Observation;
+           qb:dataset :cube1;
+           :unemployment "16.8"^^xsd:decimal.
 
+ :dsd2 a qb:DataStructureDefinition;
+           qb:component [qb:attribute  sdmx-attribute:unitMeasure;
+                         qb:componentAttachment qb:DataSet];
+           qb:component [qb:measure  :unemployment].
+ :cube2 a qb:DataSet;
+           qb:structure :dsd2;
+           sdmx-attribute:unitMeasure qudt:Person.
+ :obs2 a qb:Observation;
+           qb:dataset :cube2;
+           :unemployment "89600"^^xsd:int.
+			</pre>			
+		</aside>
+    <p><u>Alternative 2: Publish one cube with multiple units and define the unit at the qb:MeasureProperty.</u> For example:</p>
+    <aside class="example">
+			<img src="images/bp3.2alt.jpg" width=800>
+			<pre>
+ :unemploymentPerc a qb:MeasureProperty;
+                 sdmx-attribute:unitMeasure qudt:Percent.
+ :unemploymentNum a qb:MeasureProperty;
+                 sdmx-attribute:unitMeasure qudt:Person.
+ :dsd a qb:DataStructureDefinition;
+                 qb:component [qb:attribute  sdmx-attribute:unitMeasure;
+                               qb:componentAttachment qb:MeasureProperty];
+                 qb:component [qb:measure  :unemploymentPerc];
+                 qb:component [qb:measure  :unemploymentNum].
+ :cube a qb:DataSet;
+                 qb:structure :dsd.
+ :obs1 a qb:Observation;
+                 qb:dataset :cube;
+                 :unemploymentPerc "16.8"^^xsd:decimal;
+                 :unemploymentNum "89600"^^xsd:int.
+			</pre>			
+		</aside> 
+	</section>
+</div>
+<!-- END BP3 -->
 <h2 id="changes">B Changes in this version (Non-Normative)</h2>
 <ul>
   <li><p>changelog</p>
