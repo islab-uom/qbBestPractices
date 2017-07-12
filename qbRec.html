@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>QB recommendations</title>
+  <link rel="stylesheet" type="text/css" href="./css/base.css" />
+  <link rel="stylesheet" type="text/css" href="./css/ezweb.css" />
+  
+  <link rel="stylesheet" type="text/css" href="https://www.w3.org/TR/dwbp/localstyles.css" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<h1 id="title">QB recommendations</h1>
+
+<!--<h2 id="subtitle">CanCO Ontology</h2>-->
+
+<h2 id="mymw-doctype">Working Draft - 12 July 2017</h2>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://www.granatum.org/ontology/spec-20120517">XXX</a>
+    </dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://www.granatum.org/ontology/spec-20120517">YYY</a>
+    </dd>
+  <dt>Last Update:</dt>
+    <dd>Date: 17/05/2012</dd>
+  <dt>Authors:</dt>
+    <dd>Dimitris Zeginis, CERTH</dd>
+    <dd>Evangelos Kalampokis, CERTH</dd>
+	<dd>Giorgos Kopanidis, CERTH</dd>
+  <dt>Editors:</dt>
+    <dd>XXX, YYY</dd>
+   <dt>Contributors:</dt>
+    <dd>XXX</dd>
+  <dt>Acknowledgements:</dt>
+    <dd>See <a href="#acknowledgments">acknowledgements</a></dd>
+</dl>
+
+<p class="copyright">Copyright © 2017.... This work is licensed under XXX, </p>
+
+<p class="copyright" style="clear:both">This work is supported by XXX</p>
+<hr />
+
+<h2 id="abstract">Abstract</h2>
+
+<p> Abstra goes here</p>
+
+<h2 id="status">Status of this Document</h2>
+
+<p><strong>This is a work in progress!</strong> This document is changing on a
+daily if not hourly basis. Comments are very welcome, please send them to the
+authors. Thank you. </p>
+
+<h2 id="contents">Table of Contents</h2>
+<ol id="toc">
+  <li><a href="#intro">1. Introduction</a> </li>
+  <li><a href="#audience">2. Audience</a> </li>
+  <li><a href="#scope">3. Scope</a> </li>
+  <li><a href="#namespaces">4. Namespaces</a> </li>
+  <li><a href="#runningexample">5. Running example</a> </li>  
+  <li><a href="#bestpractices">6. Best practices</a> </li>  
+  
+  
+</ol>
+
+<h3>Appendices</h3>
+<ol id="appendix">
+  <li><a href="#references">References</a></li>
+  <li><a href="#alternatives">ALternative practices</a></li>
+  <li><a href="#changes">Changes in this version</a> (Non-Normative)</li>
+  <li><a href="#acknowledgments">Acknowledgements</a> (Non-Normative)</li>
+</ol>
+<hr />
+
+<h2 id="intro">1. Introduction</h2>
+
+<p> Into goes here </p>
+
+
+<h2 id="audience">2. Audience</h2>
+
+<p> Audience goes here </p>
+
+<h2 id="scope">3. Scope</h2>
+
+<p> Scope goes here</p>
+
+<h2 id="namespaces">4. Namespaces</h2>
+
+<table id="uripatternstable">
+      <caption>Namespaces used in the document</caption>
+      <tbody>
+        <tr>
+          <th>Prefix</th>
+          <th>Namespace IRI</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>rdf</td>
+          <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
+          <td>Resource Description Framework (RDF)</td>
+        </tr>
+        <tr>
+          <td>rdfs</td>
+          <td>http://www.w3.org/2000/01/rdf-schema#</td>
+          <td><a href="#bib-RDF-SCHEMA">RDF Schema vocabulary (RDFS)</a></td>
+        </tr>
+        <tr>
+          <td>skos</td>
+          <td>http://www.w3.org/2004/02/skos/core#</td>
+          <td><a href="#bib-SKOS-PRIMER">Simple Knowledge Organization System (SKOS)</a></td>
+        </tr>
+		 <tr>
+          <td>qb</td>
+          <td>http://purl.org/linked-data/cube#</td>
+          <td><a href="#bib-SKOS-PRIMER">The RDF Data Cube Vocabulary</a></td>
+        </tr>
+		 <tr>
+          <td>OTHER</td>
+          <td>XXX</td>
+          <td><a href="#bib-SKOS-PRIMER">YYY</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+<h2 id="runningexample">5. Running Example</h2>
+
+<div class="example">
+John works for the National Statistical Institute of Belgium and is in charge of publishing
+ statistical data about unemployment and poverty in the regions of Belgium for the last year.
+ These data refer to various groups of people based on their age and gender. John wants to publish 
+ these data using linked data technologies and standards in order to be open and reusable.
+ These data are multidimentional and thus they should be modeled as a cube. John needs to define
+ its measures, units, dimensions and code lists. Some of the challenges he faces are: i) 
+ the definition of multiple measures (unemployment, poverty) per cube and ii) the definition 
+ of multiple units (percentage, count) per measure. Finally, John needs the data to be interoperable
+ with open statistical data both inside and outside Belgium. Towards this end he wants to reuse standard
+ vocabularies and code lists.
+</div>
+
+	
+<h2 id="bestpractices">6. Best practices</h2>
+
+<!-- BP1 -->
+<div class="practice">
+	<p><span id="definingTheMeasure" class="practicelab">BP1: Defining the measure</span></p>
+    <p class="practicedesc">John needs to define a measure e.g. unemployment. He is wondering what is the best way to do is.</p>
+
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-1" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-1" resource="#ch-1"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
+		<p>The cube measure represents the phenomenon being observed (e.g. unemployment). At the QB vocabulary measures are RDF properties
+		of qb:MeasureProperty type, they are defined at the cube structure (qb:DataStructureDefinition) and are used to assign			numerical values at the observations (e.g. unemployment = 7.8%). The selection of the measure property may lead into two
+			types of conflicts:</p>
+		<ul>
+			<li>Homonym conflicts appear when the same measure property is used to represent different measures. 
+				For example the Scottish Government, defines the generic measure properties count and ratio
+				(i.e. http://statistics.gov.scot/def/measure-properties/count and 
+				http://statistics.gov.scot/def/measure-properties/ratio) to represent different measures. In this case,
+				the phenomenon being observed is modeled as a unit.</li>
+			<li>Synonym conflicts appear when different measure properties (e.g. test:unemployment and eg:unemployment)
+				represent the same measure. </li>
+		</ul>
+		Both types of conflict appear at the existing approaches. These approaches make use of the generic measure proposed by the
+		SDMX vocabulary (i.e. sdmx-measure:obsValue) in two ways: 
+		
+		<p><u>Re-use sdmx-measure:obsValue as a measure</u>. In this case homonym conflicts appear,
+		since the same measure property represents different measures. This approach has many disadvantages:
+		i) it requires additional meta-data to indicate what is measured, ii) it does not enable the use of multiple
+		measures at a cube and iii) it prevents the linking with other cubes. However, sdmx-measure:obsValue facilitates
+		the conversion of existing SDMX data to the QB vocabulary.</p>
+		<aside class="example">
+			<img src="images/bp1_eg1.jpg" width=500>
+			<pre>
+ :dsd a qb:DataStructureDefinition;
+       qb:component [qb:measure sdmx-measure:obsValue]
+			</pre>			
+		</aside>
+		
+		<p><u>Define a new measure property that is also a sub-property of sdmx-measure:obsValue.</u> In this case both
+		homonym and synonym conflict may appear. Homonym conflicts appear when the new measure property is generic 
+		(e.g. count, ratio), while synonym conflicts appear when two different measure properties model the same measure 
+		(e.g. unemployment). Moreover, defining the new measure property as sub-property of sdmx-measure:obsValue is a redundancy
+		because it does not add any additional semantics than defining the measure as a qb:MeasureProperty.</p>
+		<aside class="example">
+			<img src="images/bp1_eg2.jpg" width=800>
+			<pre>
+:unemployment a qb:MeasureProperty;	
+                    rdfs:subPropertyOf sdmx-measure:obsValue. 
+:dsd a qb:DataStructureDefinition;
+             qb:component [qb:measure :unemployment].
+			</pre>			
+		</aside>	
+    </section>
+	
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-1" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-1" resource="#bp-1"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+		
+		<p><u>BP1.1: Define a new measure that is not sub-property of sdmx-measure:obsValue.</u>
+		The new measure enable the annotation with additional properties (e.g. labels, comments).</p>
+		
+		<aside class="example">
+			<img src="images/bp1.1.jpg" width=500>
+			<pre>
+:unemployment a qb:MeasureProperty. 
+:dsd a qb:DataStructureDefinition;
+              qb:component [qb:measure :unemployment].
+			</pre>			
+		</aside>	
+	</section>
+	
+	
+	<section class="axioms" typeof="bibo:Chapter" resource="#open-1" property="bibo:hasPart">
+		<h4 class="subhead" id="open-1" resource="#open-1"><span property="xhv:role" resource="xhv:heading">Open issues</span></h4>
+		<ul>
+			<li>Code lists for measures.</li>
+			<li>Indicators Interoperability (name, calculation formula, data etc.)</li>
+		</ul>
+	</section>	
+</div>
+<!-- END BP1 -->
+
+
+
+<!-- BP1 -->
+<div class="practice">
+	<p><span id="XXX" class="practicelab">XXX</span></p>
+    <p class="practicedesc">XXX.</p>
+
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-XXX" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-XXX" resource="#ch-XXX"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
+		
+		<aside class="example">
+			<img src="images/bp1.1.jpg" width=500>
+			<pre>
+ XXX       
+			</pre>			
+		</aside>		
+    </section>
+	
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-XXX" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-XXX" resource="#bp-XXX"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+			
+	</section>
+	
+	
+	<section class="axioms" typeof="bibo:Chapter" resource="#open-XXX" property="bibo:hasPart">
+		<h4 class="subhead" id="open-XXX" resource="#open-XXX"><span property="xhv:role" resource="xhv:heading">Open issues</span></h4>
+		<ul>
+			<li>XXX.</li>			
+		</ul>
+	</section>	
+</div>
+<!-- END BP1 -->
+
+
+
+
+
+
+
+
+
+<div class="back">
+
+
+<h2 id="alternatives">A Alternative practices</h2>
+
+<h2 id="changes">B Changes in this version (Non-Normative)</h2>
+<ul>
+  <li><p>changelog</p>
+  </li>
+</ul>
+</div>
+
+
+<h2><a id="acknowledgments"></a>C Acknowledgements (Non-Normative)</h2>
+
+<p>This document was produced with the participation of the <a
+href="http://www.granatum.org/">GRANATUM project</a> consortium ...: </p>
+
+</body>
+</html>
