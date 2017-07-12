@@ -292,7 +292,37 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			</pre>			
 		</aside>
     <p>Comparison matrix of the levels to define the unit:</p>
-    +++++++++++++
+    <table border="1">
+  <tr>
+    <th></th>
+    <th><b>qb:DataSet</b></th> 
+    <th><b>qb:MeasureProperty</b></th>
+    <th><b>qb:Observation</b></th>
+  </tr>
+  <tr>
+    <td>Query optimization</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>Multiple units at one cube</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>Use one qb:MeasureProperty for different units of the same measure</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <td>Re-use qb:Observations at another context</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+</table>
     </section>
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-2.4" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-2.4" resource="#ch-2.4"><span property="xhv:role" resource="xhv:heading">Challenge 2.4</span></h4>
@@ -343,32 +373,43 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP3 -->
 <div class="practice">
-	<p><span id="XXX" class="practicelab">XXX</span></p>
-    <p class="practicedesc">XXX.</p>
+	<p><span id="DefiningMultipleUnitsPerMeasure" class="practicelab">BP3: Defining multiple units per measure</span></p>
+    <p class="practicedesc">John realizes that the data he wants to publish contain unemployment both as a percentage and as an absolute number, so he needs to include both units. Now he is wondering: i) whether to include both units at the same cube or define separate cubes for each unit and ii) where to define the unit e.g. at the structure or at the observation.</p>
 
-    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-XXX" property="bibo:hasPart">
-		<h4 class="subhead" id="ch-XXX" resource="#ch-XXX"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
-		
-		<aside class="example">
-			<img src="images/bp1.1.jpg" width=500>
-			<pre>
- XXX       
-			</pre>			
-		</aside>		
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-3" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-3" resource="#ch-3"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
+    <p>John realizes that the data he wants to publish contain unemployment both as a percentage and as an absolute number, so he needs to include both units. Now he is wondering: i) whether to include both units at the same cube or define separate cubes for each unit and ii) where to define the unit e.g. at the structure or at the observation.
+      <ul>
+        <li>Include all units at one cube</li>
+        <li>Publish multiple cubes with one unit each</li>
+      </ul></p>
+     <p>John realizes that the data he wants to publish contain unemployment both as a percentage and as an absolute number, so he needs to include both units. Now he is wondering: i) whether to include both units at the same cube or define separate cubes for each unit and ii) where to define the unit e.g. at the structure or at the observation.</p>
     </section>
 	
-	<section class="axioms" typeof="bibo:Chapter" resource="#bp-XXX" property="bibo:hasPart">
-		<h4 class="subhead" id="bp-XXX" resource="#bp-XXX"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
-			
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-3" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-3" resource="#bp-3"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+    <p><u>BP3.1: Publish one cube with multiple units and define the unit at each qb:Observation.</u> Conceptually it is preferable to have all related units of the same measure at the same cube. In case that query optimization of available units is required, then define the units also at the qb:DataSet. For example:</p>
+  <aside class="example">
+			<img src="images/bp3.jpg" width=500>
+			<pre>
+ :unemployment a qb:MeasureProperty. 
+ :dsd a qb:DataStructureDefinition;
+                  qb:component [qb:attribute sdmx-attribute:unitMeasure];
+                  qb:component [qb:measure :unemployment].
+ :cube a qb:DataSet;
+                  qb:structure :dsd.
+ :obs1 a qb:Observation;
+                  qb:dataset :cube.
+                  :unemployment "16.8"^^xsd:decimal;
+                  sdmx-attribute:unitMeasure qudt:Percent.
+ :obs2 a qb:Observation;
+                  qb:dataset :cube;
+                  :unemployment  "89600"^^xsd:int;                                                       
+                  sdmx-attribute:unitMeasure qudt:Person.
+			</pre>			
+		</aside>
+    <p>See the appendix for other alternatives that address the same challenge.</p>  
 	</section>
-	
-	
-	<section class="axioms" typeof="bibo:Chapter" resource="#open-XXX" property="bibo:hasPart">
-		<h4 class="subhead" id="open-XXX" resource="#open-XXX"><span property="xhv:role" resource="xhv:heading">Open issues</span></h4>
-		<ul>
-			<li>XXX.</li>			
-		</ul>
-	</section>	
 </div>
 <!-- END BP3 -->
 
