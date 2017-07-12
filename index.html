@@ -616,6 +616,71 @@ John works for the National Statistical Institute of Belgium and is in charge of
 </div>
 <!-- END BP6 -->
 
+<!-- BP7 -->
+<div class="practice">
+	<p><span id="DefiningValuesOfCommonDimensions" class="practicelab">BP7: Defining values of common dimensions</span></p>
+    <p class="practicedesc">John now knows how to define the values of his cube’s dimension including time, gender, geography and age. However, he is still wondering: i) whether to use data types or URIs and ii) in the case of URIs what code lists to use.</p>
+
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-7.1" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-7.1" resource="#ch-7.1"><span property="xhv:role" resource="xhv:heading">Challenge 7.1</span></h4>
+    <p>The values of time dimension can be either periods of time (e.g. 2016) or specific points in time (e.g. 01/01/2016) and thus can be represented either as URIs (e.g. http://reference.data.gov.uk/id/year/2016) or as data-types (e.g. ``2016-01-01"^^xsd:date). The selection of the approach to represent the time values may lead to synonym conflicts since different values can be used for the same purpose. Four approaches are commonly used to express the time values:</p>
+    <ul>
+      <li>Use URIs from reference.data.gov.uk  (most popular at official portals). This reference dataset is not defined as a skos:ConceptScheme.</li>
+      <li>Use resources from DBpedia, which are not included in a skos:ConceptScheme</li>
+      <li>Define a code list</li>
+      <li>Use the xsd:date</li>
+    </ul>
+    </section>
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-7.2" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-7.2" resource="#ch-7.2"><span property="xhv:role" resource="xhv:heading">Challenge 7.2</span></h4>
+    <p>The values of the geography and age dimensions are usually represented as URIs. The selection of the URI to represent the values may lead to synonym conflicts since different values can be used for the same purpose. Currently there are no standardized universal code-lists that can be used for these dimensions. However, assuming the geography dimension, official location-specific code lists have been defined for specific countries, regions etc. </p>
+    </section>
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-7.3" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-7.3" resource="#ch-7.3"><span property="xhv:role" resource="xhv:heading">Challenge 7.3</span></h4>
+    <p>The values of the gender dimension are usually represented as URIs. The linked data version of SDMX has already defined a code list for gender including the values sdmx-code:sex-F (female), sdmx-code:sex-M (male),  sdmx-code:sex-U (undefined), sdmx-code:sex-N (not applicable) and sdmx-code:sex-T (total). In some cases however, the SDMX code list cannot cover the modeling needs e.g. more notions of sex are needed like hermaphroditism, transgender, asexual.</p>
+    <p>This challenge is addressed by BP5.2</p>
+    </section>
+
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-7" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-7" resource="#bp-7"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+    <p><u>BP7.1a: In case you need to describe a specific point in time then define a new dimension that is also sub-property of sdmx-dimension:refPeriod and set as rdfs:range xsd:date.</u></p>
+  <aside class="example">
+			<img src="images/bp7.1.a.jpg" width=500>
+			<pre>
+  :time a qb:DimensionProperty;
+          rdfs:subPropertyOf  sdmx-dimension:refPeriod;
+          rdfs:range xsd:dateTime.
+  :dsd a qb:DataStructureDefinition;
+          qb:component [qb:dimension :time].
+			</pre>			
+		</aside>
+    <p><u>BP7.1b: In case you need to describe a period of time then define a new dimension that is also sub-property of sdmx-dimension:refPeriod and set as rdfs:range the interval:Interval</u> (reference.data.gov.uk uses Intervals to define years). However if reference.data.gov.uk   is not sufficient, then a code lists can also be used (see BP9).</p>
+    <aside class="example">
+			<img src="images/bp7.1.b.jpg" width=500>
+			<pre>
+  :time a qb:DimensionProperty;
+          rdfs:subPropertyOf  sdmx-dimension:refPeriod;
+          rdfs:range interval:Interval.   
+  :dsd a qb:DataStructureDefinition;
+          qb:component [qb:dimension :time].
+			</pre>			
+		</aside>
+    <p><u>BP7.2 (Applies to geography and age): Define a new dimension that is also sub-property of the sdmx-dimension:refArea or sdmx-dimension:age respectively. Define the rdfs:range and/or qb:codeList of this dimension (see BP6). If a code list or reference dataset that covers the modeling needs exists, then it should be re-used. Otherwise a new code list should be created (see BP9).</u></p>
+    <aside class="example">
+			<img src="images/bp7.2.jpg" width=500>
+			<pre>
+  :geo a qb:DimensionProperty;
+         rdfs:subPropertyOf  sdmx-dimension:refArea;
+         qb:codeList :greekGeo;
+         rdfs:range skos:Concept.   
+  :dsd a qb:DataStructureDefinition;
+         qb:component [qb:dimension :geo].
+			</pre>			
+		</aside>    
+	</section>
+</div>
+<!-- END BP7 -->
+
 
 
 
