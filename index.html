@@ -681,6 +681,42 @@ John works for the National Statistical Institute of Belgium and is in charge of
 </div>
 <!-- END BP7 -->
 
+<!-- BP8 -->
+<div class="practice">
+	<p><span id="DefiningSingleValueDimensions" class="practicelab">BP8: Defining single value dimensions</span></p>
+    <p class="practicedesc">The cube includes data only for one year i.e. 2016. John is wondering: i) whether to include this single value at the dataset or not and ii) in case of including, where to define it.</p>
+
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-8" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-8" resource="#ch-8"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
+    <p>Some datasets contain data with a single value for a dimension (e.g. census data has a single value for the time dimension). The QB vocabulary enables the deﬁnition of the single value at different levels.</p>
+    <p><u>Include single value at the qb:Dataset.</u> In this case the single value is easily identified directly from the structure. However, it does not enable the future addition of observations with a different value for that particular dimension. Another disadvantage of this approach is that qb:Observations cannot easily be re-used at another context, because they do not contain all the relevant information i.e. dimension with the single values is missing.</p>
+    <p><u>Create a qb:Slice for the single value.</u> In this case the single value is easily identified from the structure. There is also the possibility to add observations with a different value by creating another qb:Slice for that value. A disadvantage of this approach is that it imposes the extra burden of defining qb:Slices when publishing data cubes. Moreover, qb:Observations cannot easily be re-used at another context, because they do not contain all the relevant information i.e. dimension with the single values is missing.</p>
+    <p><u>Include single value at every qb:Observation.</u> Simplicity and flexibility during future data maintenance is the advantage of defining the single value at this level. This practice has the cost of an increased number of triples, but it enables the addition of more observations at the same dataset with a different value for that particular dimension. Another advantages is the easy re-use of qb:Observations at another context.</p>
+    </section>
+
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-8" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-8" resource="#bp-8"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+    <p><u>BP8.1: Always include the single value of a dimensions at each qb:Observation.</u></p>
+    <p>Example</p>
+  <aside class="example">
+			<img src="images/bp8.jpg" width=500>
+			<pre>
+  :obs1 a qb:Observation;
+        sdmx-dimension:sex sdmx-code:sex-M;
+        :age :30-45;
+        :geo :Brussels;
+        :time year:2016.
+  :obs2 a qb:Observation;
+        sdmx-dimension:sex sdmx-code:sex-F;
+        :age :20-30;
+        :geo :Brussels;
+        :time year:2016.
+			</pre>			
+		</aside>
+	</section>
+</div>
+<!-- END BP8 -->
+
 
 
 
