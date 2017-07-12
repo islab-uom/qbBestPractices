@@ -572,6 +572,50 @@ John works for the National Statistical Institute of Belgium and is in charge of
 </div>
 <!-- END BP5 -->
 
+<!-- BP6 -->
+<div class="practice">
+	<p><span id="DefiningDimensionValues" class="practicelab">BP6: Defining dimension values</span></p>
+    <p class="practicedesc">John needs to associate the cube dimensions with the valid potential values. He is wondering what is the best way to do so.</p>
+
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-6" property="bibo:hasPart">
+		<h4 class="subhead" id="ch-6" resource="#ch-6"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
+    <p>Dimension values can be either data types (e.g. xsd:dateTime) or URIs. Currently, many reference datasets have been defined to populate dimensions (e.g. time). However, some of them (e.g. reference.data.gov.uk) are not modeled as skos:ConceptScheme, skos:Collection  or  qb:HierarchicalCodeList.</p>
+    <p>The QB vocabulary allows two complementary approaches for defining the valid potential values of dimensions.</p>
+    <p><u>Use the property rdfs:range</u> to define the type of valid values of a qb:DimensionProperty  in the usual RDF manner. For example the values of the time dimension can be defined using as rdfs:range the xsd:dateTime.</p>
+    <p><u>Use the property qb:codeList</u> to associate a qb:DimensionProperty with a code list (i.e. potential values). In statistical data sets it is common for values to be encoded using a code list and it is useful to easily identify the overall code list with a URI. The values of the qb:codeList can be a skos:ConceptScheme, skos:Collection or qb:HierarchicalCodeList. In such a case the rdfs:range can be a skos:Concept. According to the QB vocabulary a useful design pattern is to define an rdfs:Class whose members are all the skos:Concepts within a particular code list. In that way the rdfs:range can be made more specific.</p>
+    </section>
+	
+	<section class="axioms" typeof="bibo:Chapter" resource="#bp-6" property="bibo:hasPart">
+		<h4 class="subhead" id="bp-6" resource="#bp-6"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
+    <p><u>BP6.1: Always define the rdfs:range of a qb:DimensionProperty.</u></p>
+  <aside class="example">
+			<img src="images/bp6.1.jpg" width=500>
+			<pre>
+  :d a qb:DimensionProperty;
+        rdfs:range xsd:dateTime.
+  :dsd a qb:DataStructureDefinition;
+        qb:component [qb:dimension :d].
+			</pre>			
+		</aside>
+    <p><u>BP6.2: Define the qb:codeList of a qb:DimensionProperty when the code list is modeled as skos:ConceptScheme or skos:Collection  or  qb:HierarchicalCodeList.</u> In this case define the rdfs:range as skos:Concept. (for the way to define a new code list see BP9)</p>
+    <aside class="example">
+			<img src="images/bp6.2.jpg" width=500>
+			<pre>
+  :d a qb:DimensionProperty;
+          rdfs:range skos:Concept;
+          qb:codeList :cl.
+  :dsd a qb:DataStructureDefinition;
+          qb:component [qb:dimension :d].
+			</pre>			
+		</aside>  
+	</section>
+  <section class="axioms" typeof="bibo:Chapter" resource="#open-6" property="bibo:hasPart">
+		<h4 class="subhead" id="open-6" resource="#open-6"><span property="xhv:role" resource="xhv:heading">Open issues</span></h4>
+    <p>The use of the qb:codeList indicates all the potential values of a qb:DimensionProperty. However, it is common to not use all the values at the cube. For example, a code list may contain values for the geography of Europe, but the cube uses only values for Greece. In this case there is no way to retrieve only the used values from the cube structure. They can be only retrieved by iterating over all the cube observations that is a time consuming process.</p>
+	</section>	
+</div>
+<!-- END BP6 -->
+
 
 
 
