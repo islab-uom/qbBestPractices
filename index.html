@@ -81,12 +81,13 @@ Comments are very welcome, please send them to the authors.</p>
 
 <h2 id="contents">Table of Contents</h2>
 <ol id="toc">
-  <li><a href="#intro">1. Introduction</a> </li>
-  <li><a href="#audience">2. Audience</a> </li>
-  <li><a href="#scope">3. Scope</a> </li>
-  <li><a href="#namespaces">4. Namespaces</a> </li>
-  <li><a href="#runningexample">5. Running example</a> </li>  
-  <li><a href="#bestpractices">6. Best practices</a> </li>  
+  <li><a href="#intro">Introduction</a> </li>
+  <li><a href="#audience">Audience</a> </li>
+  <li><a href="#scope">Scope</a> </li>
+  <li><a href="#namespaces">Namespaces</a> </li>
+  <li><a href="#bpsummary">Best practice summary</a> </li>
+  <li><a href="#runningexample">Running example</a> </li>  
+  <li><a href="#bestpractices">Best practices</a> </li>  
   
   
 </ol>
@@ -157,7 +158,22 @@ that can be reused across different portals. </p>
     </table>
 
 
-<h2 id="runningexample">5. Running Example</h2>
+<h2 id="bpsummary">5. Best practice summary</h2>	
+	
+	<ul>
+      <li><a href="#definingTheMeasure">BP1: Defining the measure</a></li>
+	  <li><a href="#definingTheUnit">BP2: Defining the unit</a></li>
+	  <li><a href="#definingMultipleUnitsPerMeasure">BP3: Defining multiple units per measure</a></li>
+	  <li><a href="#definingMultipleMeasures">BP4: Defining multiple measures</a></li>
+	  <li><a href="#definingDimensionProperties">BP5: Defining dimension properties </a></li>
+	  <li><a href="#definingDimensionValues">BP6: Defining dimension values</a></li>
+	  <li><a href="#definingValuesOfCommonDimensions">BP7: Defining values of common dimensions</a></li>
+	  <li><a href="#definingSingleValueDimensions">BP8: Defining single value dimensions</a></li>
+	  <li><a href="#definingCodeLists">BP9: Defining code lists</a></li>
+	</ul>
+	
+	
+<h2 id="runningexample">6. Running Example</h2>
 
 <div class="example">
 John works for the National Statistical Institute of Belgium and is in charge of publishing
@@ -173,7 +189,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 </div>
 
 	
-<h2 id="bestpractices">6. Best practices</h2>
+<h2 id="bestpractices">7. Best practices</h2>
 
 <!-- BP1 -->
 <div class="practice">
@@ -401,7 +417,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP3 -->
 <div class="practice">
-	<p><span id="DefiningMultipleUnitsPerMeasure" class="practicelab">BP3: Defining multiple units per measure</span></p>
+	<p><span id="definingMultipleUnitsPerMeasure" class="practicelab">BP3: Defining multiple units per measure</span></p>
     <p class="practicedesc">John realizes that the data he wants to publish contain unemployment both as a percentage and as an absolute number, so he needs to include both units. Now he is wondering: i) whether to include both units at the same cube or define separate cubes for each unit and ii) where to define the unit e.g. at the structure or at the observation.</p>
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-3" property="bibo:hasPart">
@@ -443,7 +459,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP4 -->
 <div class="practice">
-	<p><span id="DefiningMultipleMeasures" class="practicelab">BP4: Defining multiple measures</span></p>
+	<p><span id="definingMultipleMeasures" class="practicelab">BP4: Defining multiple measures</span></p>
     <p class="practicedesc">John wants to publish also data about poverty in Belgium. John is wondering whether to publish the data about unemployment and poverty at the same cube or publish separate cubes. In the case that both measures are included at the same cube, he is also wondering what is the best way to do so, considering that the measures have multiple units (percentage and absolute number).</p>
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-4" property="bibo:hasPart">
@@ -557,8 +573,8 @@ John works for the National Statistical Institute of Belgium and is in charge of
   <section class="axioms" typeof="bibo:Chapter" resource="#open-4" property="bibo:hasPart">
 		<h4 class="subhead" id="open-4" resource="#open-4"><span property="xhv:role" resource="xhv:heading">Open issues</span></h4>
 		<ul>
-			<li>•	Should a cube have one or multiple measures?</li>
-			<li>•	How to index multiple units for multiple measures at BP4.2?</li>
+			<li>Should a cube have one or multiple measures?</li>
+			<li>How to index multiple units for multiple measures at BP4.2?</li>
 		</ul>
 	</section>	
 </div>
@@ -566,7 +582,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP5 -->
 <div class="practice">
-	<p><span id="DefiningDimensionProperties" class="practicelab">BP5: Defining dimension properties</span></p>
+	<p><span id="definingDimensionProperties" class="practicelab">BP5: Defining dimension properties</span></p>
     <p class="practicedesc">John has already defined the measures and the units of his cube. Now he needs to define the dimensions including time, geography, age and gender. He is wondering what RDF properties to use for the dimensions.</p>
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-5" property="bibo:hasPart">
@@ -602,7 +618,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP6 -->
 <div class="practice">
-	<p><span id="DefiningDimensionValues" class="practicelab">BP6: Defining dimension values</span></p>
+	<p><span id="definingDimensionValues" class="practicelab">BP6: Defining dimension values</span></p>
     <p class="practicedesc">John needs to associate the cube dimensions with the valid potential values. He is wondering what is the best way to do so.</p>
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-6" property="bibo:hasPart">
@@ -646,7 +662,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP7 -->
 <div class="practice">
-	<p><span id="DefiningValuesOfCommonDimensions" class="practicelab">BP7: Defining values of common dimensions</span></p>
+	<p><span id="definingValuesOfCommonDimensions" class="practicelab">BP7: Defining values of common dimensions</span></p>
     <p class="practicedesc">John now knows how to define the values of his cube’s dimension including time, gender, geography and age. However, he is still wondering: i) whether to use data types or URIs and ii) in the case of URIs what code lists to use.</p>
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-7.1" property="bibo:hasPart">
@@ -711,7 +727,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP8 -->
 <div class="practice">
-	<p><span id="DefiningSingleValueDimensions" class="practicelab">BP8: Defining single value dimensions</span></p>
+	<p><span id="definingSingleValueDimensions" class="practicelab">BP8: Defining single value dimensions</span></p>
     <p class="practicedesc">The cube includes data only for one year i.e. 2016. John is wondering: i) whether to include this single value at the dataset or not and ii) in case of including, where to define it.</p>
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-8" property="bibo:hasPart">
@@ -749,7 +765,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
 <!-- BP9 -->
 <div class="practice">
-	<p><span id="DefiningCodeLists" class="practicelab">BP9: Defining code lists</span></p>
+	<p><span id="definingCodeLists" class="practicelab">BP9: Defining code lists</span></p>
     <p class="practicedesc">John has already defined dimension properties and the code lists of some dimensions. However, there are no appropriate code lists for all the dimensions. Thus, John has to define them.</p>
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-9.1" property="bibo:hasPart">
