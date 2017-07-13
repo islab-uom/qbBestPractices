@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
       "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -724,7 +724,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			<pre>
   :geo a qb:DimensionProperty;
          rdfs:subPropertyOf  sdmx-dimension:refArea;
-         qb:codeList :belgiumGeo;
+         qb:codeList :BEgeo;
          rdfs:range skos:Concept.   
   :dsd a qb:DataStructureDefinition;
          qb:component [qb:dimension :geo].
@@ -754,16 +754,20 @@ John works for the National Statistical Institute of Belgium and is in charge of
   <aside class="example">
 			<img src="images/bp8.jpg" width=800>
 			<pre>
-  :obs1 a qb:Observation;
+:obs1 a qb:Observation;
         sdmx-dimension:sex sdmx-code:sex-M;
-        :age :30-45;
+        :age :15-24;
         :geo :Brussels;
-        :time year:2016.
-  :obs2 a qb:Observation;
+        :time year:2016;
+        sdmx-attribute:unitMeasure qudt:Percent;
+        :unemployment "35.1"^^xsd:decimal.
+:obs2 a qb:Observation;
         sdmx-dimension:sex sdmx-code:sex-F;
-        :age :20-30;
+        :age :15-24;
         :geo :Brussels;
-        :time year:2016.
+        :time year:2016;
+        sdmx-attribute:unitMeasure qudt:Percent;
+        :unemployment "36.7"^^xsd:decimal.
 			</pre>			
 		</aside>
 	</section>
@@ -775,22 +779,22 @@ John works for the National Statistical Institute of Belgium and is in charge of
 <!-- BP9 -->
 <div class="practice">
 	<p><span id="definingCodeLists" class="practicelab">BP9: Defining code lists</span></p>
-    <p class="practicedesc">John has already defined dimension properties and the code lists of some dimensions. However, there are no appropriate code lists for all the dimensions. Thus, John has to define them.</p>
+    <p class="practicedesc">John has already defined dimension properties and decided what code lists to use for some of the dimensions (e.g. time, gender). However, there are no appropriate code lists for all the dimensions (e.g. age, geography), thus John has to define them.</p>
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-9.1" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-9.1" resource="#ch-9.1"><span property="xhv:role" resource="xhv:heading">Challenge 9.1</span></h4>
-    <p>In some cases there are no appropriate code lists that can cover the modeling needs of the cube. Thus new code lists should be defined. The QB vocabulary recommends using SKOS to model the code lists. Specifically, representing the individual code values using skos:Concept and the overall set of values using skos:ConceptScheme or skos:Collection.</p>
+    <p>In some cases there are no appropriate code lists that cover the modeling needs of the cube. Thus, new code lists should be defined. The QB vocabulary recommends using SKOS to model the code lists. In particular, it recommends to represent the individual code values using skos:Concept and the overall set of values using skos:ConceptScheme or skos:Collection.</p>
     
-	<p><It is a common practice to include only relevant values at a code list. Sometimes however, irrelevant values are included at the same code list (e.g. male, female, 15-20, 20-30).</p>
+	<p>It is a common practice to include only relevant values at a code list. In practice, sometime irrelevant values are included at the same code list (e.g. Brussels, Wallone, 20-30, 30-45).</p>
     </section>
 
 	 <section class="axioms" typeof="bibo:Chapter" resource="#challenge-9.2" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-9.2" resource="#ch-9.2"><span property="xhv:role" resource="xhv:heading">Challenge 9.1</span></h4>
-    <p>It is common code list to include data with a hierarchical structure (e.g. geographical divisions). Thus, they can be represented using hierarchies that consist of generalization/specialization relations (e.g. Brussels isPartOf Belgium) and levels (e.g. country, region, city). In practice however, sometimes the hierarchical data are represented flat in a code list without generalization/specialization relations.</p>
+    <p>It is common code list to include data with a hierarchical structure (e.g. geographical divisions). Thus, they can be represented using hierarchies that consist of generalization/specialization relations (e.g. Brussels isPartOf Belgium) and levels (e.g. country, region, city). In practice however, sometimes the hierarchical data are represented flat in a code list without generalization/specialization relations. </p>
     <p>The selection of the properties to represent generalization/specialization relations and levels may lead to synonym conflicts since different properties can be used for the same purpose. At linked statistical data the following approaches exist to represent hierarchical code lists:</p>
-	<p><u>Use SKOS vocabulary.</u> This approach defines only generalization/specialization relations i.e. skos:broader and skos:narrower.</p>
+	<p><u>Use SKOS vocabulary.</u> This approach defines only generalization/specialization relations i.e. skos:broader and skos:narrower between skos:Concepts.</p>
 	<aside class="example">
-			<img src="images/bp9.2_eg1.jpg" width=500>
+			<img src="images/bp9.2_eg1.jpg" width=400>
 			<pre>
 :Belgium a skos:Concept.
 :Brussels a skos:Concept;
@@ -799,7 +803,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
             skos:broader :Belgium.
 			</pre>
 	</aside>		
-	<p><u>Use XKOS vocabulary.</u> XKOS is an extension of SKOS that enables also the modeling of both generalization/specialization relations (i.e. xkos:isPartOf, xkos:hasPart) and hierarchical levels (i.e. xkos:ClassificationLevel).</p>		
+	<p><u>Use XKOS vocabulary.</u> XKOS is an extension of SKOS that enables the modeling of both generalization/specialization relations (i.e. xkos:isPartOf, xkos:hasPart) and hierarchical levels (i.e. xkos:ClassificationLevel) of skos:Concepts.</p>		
 	<aside class="example">
 		<img src="images/bp9.2_eg2.jpg" width=700>
 		<pre>
@@ -816,7 +820,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			</pre>
 	</aside>
 	
-	<p><u>Use QB vocabulary.</u> In this case a qb:HierarchicalCodeList should be defined that is similar to a skos:ConceptScheme. The qb:hierarchyRoot plays the same role as skos:hasTopConcept, and the value of qb:parentChildProperty plays the same role as skos:narrower. This approach is provided for cases where the terms are not available as SKOS but are available in some other RDF representation suitable for reuse.</p>
+	<p><u>Use QB vocabulary.</u> In this case a qb:HierarchicalCodeList should be defined to represent the overall set of values (similar to a skos:ConceptScheme). The qb:hierarchyRoot plays the same role as skos:hasTopConcept, and the value of qb:parentChildProperty plays the same role as skos:narrower. This approach is provided for cases where the terms are not available as SKOS but are available in some other RDF representation suitable for reuse.</p>
 	<aside class="example">
 		<img src="images/bp9.2_eg3.jpg" width=900>
 		<pre>
@@ -832,20 +836,19 @@ John works for the National Statistical Institute of Belgium and is in charge of
             :within :Begium.
 			</pre>
 	</aside>
-	<p>Sometimes, case-specific properties are exploited to express hierarchies. This approach enables the definition of generalization/specialization relations and hierarchical levels without using any standard vocabulary. Thus, the interpretation of the data is not straightforward. </p>
+	<p>Sometimes, case-specific properties are exploited to express hierarchies. This approach enables the definition of generalization/specialization relations not covered by SKOS and XKOS (e.g. administeredBy vs within). However, without using any standard vocabulary the  interpretation of the data is not always self descriptive.</p>
 	
     </section>
 	
 	
 	 <section class="axioms" typeof="bibo:Chapter" resource="#challenge-9.3" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-9.3" resource="#ch-9.3"><span property="xhv:role" resource="xhv:heading">Challenge 9.3</span></h4>
-    <p>"Τotal" values are often used at dimensions (e.g. male, female, total). They facilitate the processing of the data because there is no need to make aggregations to compute them on the fly. However, “total" values should somehow be differentiated from other values, otherwise there is a risk of false interpretation of the data (e.g. duplicate the values). In practice however, “total” values are often flat on the same code list e.g. the linked data version of SDMX contains the values sdmx-code:sex-F, sdmx-code:sex-M and sdmx-code:sex-T (total) without any distinction for the “total” value. The following practices have been proposed to distinguise “total” values.</p>
-    
-	<p><u>Use a hierarchy and deﬁne total values at the top of the hierarchy.</u> The practice to use to express the hierarchy depends on challenge 9.2</p>
+    <p>"Τotal" values are often used at dimensions (e.g. male, female and total). They facilitate the processing of the data because there is no need to compute them when required. However, “total" values should somehow be differentiated from other values, otherwise there is a risk of false interpretation of the data (e.g. duplicate the values). In practice however, “total” values are often “incognito” on a code list e.g. the linked data version of SDMX contains the values sdmx-code:sex-F, sdmx-code:sex-M and sdmx-code:sex-T (total) without any way to distinguish the "total" value. </p>
+    <p>The following practices have been proposed to differentiate "total" values.</p>
+	<p><u>Use a hierarchy and deﬁne total values at the top of the hierarchy.</u> The practice to express the hierarchy depends on challenge 9.2</p>
 	
 	<aside class="example">
-		<img src="images/bp9.3_eg1.jpg" width=700>
-		
+		<img src="images/bp9.3_eg1.jpg" width=700>		
 	</aside>
 	
 	<p><u>Put total on slices.</u> The total  value for a dimension is represented by leaving out this dimension from the slice. The example shows a slice that defines the total unemployment  (35.9%) for all the people (male and female) with age 15-24, at Brussels the year 2016.</p>
@@ -854,31 +857,44 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		<pre>
 :age a qb:DimensionProperty.
 :geo a qb:DimensionProperty.
-:period a qb:DimensionProperty.
+:time a qb:DimensionProperty.
 :slice_by_sex a qb:SliceKey
-              qb:dimension :age;
-              qb:dimension :geo;
-              qb:dimension :period.
+                qb:dimension :age;
+                qb:dimension :geo;
+                qb:dimension :time.
 :slice_tot a qb:Slice;
-              qb:sliceStructure :slice_by_sex;
-              :age :15-24;
-              :geo :Brussels;
-              :unemployment “35.9%”;
-              :time year:2016.
-			</pre>
+                qb:sliceStructure :slice_by_sex;
+                :age :15-24;
+                :geo :Brussels;
+                :time year:2016;
+                :unemployment "35.9"^^xsd:decimal;
+                sdmx-attribute:unitMeasure qudt:Percent.
+</pre>
 	</aside>
     </section>
 	
 	
 	<section class="axioms" typeof="bibo:Chapter" resource="#bp-9" property="bibo:hasPart">
 		<h4 class="subhead" id="bp-9" resource="#bp-9"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
-    <p><u>BP9.1: Define a separate code list for each descriptive category of the data (e.g. sex, age) </u></p>
+    <p><u>BP9.1: Use SKOS to model code lists (recommended by QB vocabulary). Specifically, represent individual code values using skos:Concept and the overall set of values using skos:ConceptScheme or skos:Collection. Always define a separate code list for each descriptive category of the data (e.g. age, geography).</u></p>
     <p>Example</p>
   <aside class="example">
-			<img src="images/bp9.1.jpg" width=700>
+			<img src="images/bp9.1.jpg" width=900>
+<pre>
+:15-24    a skos:Concept.
+:25-34    a skos:Concept.
+:Brussels a skos:Concept.
+:Wallone  a skos:Concept.
+:AgeList  a skos:ConceptScheme;
+           skos:hasTopConcept :15-24;
+           skos:hasTopConcept :25-34.
+:BEgeo a  skos:ConceptScheme;
+          skos:hasTopConcept :Brussels;
+          skos:hasTopConcept :Wallone.
+</pre>
 			
 		</aside>
-	<p><u>BP9.2: In the case of hierarchical data always use hierarchies to describe them. SKOS  should be preferred when the hierarchies are simple. In the case where levels are fully separated and a depth is a meaningful concept then XKOS is appropriate. Finally, when there is a need to express more relations not covered by SKOS or XKOS (e.g. administeredBy vs within) then QB vocabulary should be preferred.</u></p>
+	<p><u>BP9.2: In the case of hierarchical data always use hierarchies to describe them. SKOS should be preferred when the hierarchies are simple. In the case where levels are fully separated and a depth is a meaningful concept then XKOS is appropriate. Finally, when there is a need to express more relations not covered by SKOS or XKOS (e.g. administeredBy vs within) then QB vocabulary should be preferred.</u></p>
     <p><u>BP9.3: Always define total values for the dimensions (where applicable). Define them at the top a hierarchy (see BP9.2)</u></p>
 
 		
