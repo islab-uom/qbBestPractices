@@ -628,14 +628,14 @@ John works for the National Statistical Institute of Belgium and is in charge of
     <p>Dimension values can be either data types (e.g. xsd:dateTime) or URIs. Currently, many reference datasets have been defined to populate dimensions (e.g. time). However, some of them (e.g. reference.data.gov.uk) are not modeled as skos:ConceptScheme, skos:Collection  or  qb:HierarchicalCodeList.</p>
     <p>The QB vocabulary allows two complementary approaches for defining the valid potential values of dimensions.</p>
     <p><u>Use the property rdfs:range</u> to define the type of valid values of a qb:DimensionProperty  in the usual RDF manner. For example the values of the time dimension can be defined using as rdfs:range the xsd:dateTime.</p>
-    <p><u>Use the property qb:codeList</u> to associate a qb:DimensionProperty with a code list (i.e. potential values). In statistical data sets it is common for values to be encoded using a code list and it is useful to easily identify the overall code list with a URI. The values of the qb:codeList can be a skos:ConceptScheme, skos:Collection or qb:HierarchicalCodeList. In such a case the rdfs:range can be a skos:Concept. According to the QB vocabulary a useful design pattern is to define an rdfs:Class whose members are all the skos:Concepts within a particular code list. In that way the rdfs:range can be made more specific.</p>
+    <p><u>Use the property qb:codeList</u> to associate a qb:DimensionProperty with a code list (i.e. potential values). In statistical datasets it is common for values to be encoded using a code list and it is useful to easily identify the overall code list with a URI. The values of the qb:codeList can be a skos:ConceptScheme, skos:Collection or qb:HierarchicalCodeList. In such a case the rdfs:range can be a skos:Concept. According to the QB vocabulary a useful design pattern is to define an rdfs:Class whose members are all the skos:Concepts within a particular code list. In that way the rdfs:range can be made more specific.</p>
     </section>
 	
 	<section class="axioms" typeof="bibo:Chapter" resource="#bp-6" property="bibo:hasPart">
 		<h4 class="subhead" id="bp-6" resource="#bp-6"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
     <p><u>BP6.1: Always define the rdfs:range of a qb:DimensionProperty.</u></p>
   <aside class="example">
-			<img src="images/bp6.1.jpg" width=800>
+			<img src="images/bp6.1.jpg" width=700>
 			<pre>
 :d a qb:DimensionProperty;
        rdfs:range xsd:dateTime.
@@ -645,7 +645,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		</aside>
     <p><u>BP6.2: Define the qb:codeList of a qb:DimensionProperty when the code list is modeled as skos:ConceptScheme or skos:Collection  or  qb:HierarchicalCodeList.</u> In this case define the rdfs:range as skos:Concept. (for the way to define a new code list see BP9)</p>
     <aside class="example">
-			<img src="images/bp6.2.jpg" width=800>
+			<img src="images/bp6.2.jpg" width=700>
 			<pre>
 :d a qb:DimensionProperty;
        rdfs:range skos:Concept;
@@ -691,7 +691,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		<h4 class="subhead" id="bp-7" resource="#bp-7"><span property="xhv:role" resource="xhv:heading">Best Practice</span></h4>
     <p><u>BP7.1a: In case you need to describe a specific point in time then define a new dimension that is also sub-property of sdmx-dimension:refPeriod and set as rdfs:range xsd:date.</u></p>
   <aside class="example">
-			<img src="images/bp7.1.a.jpg" width=800>
+			<img src="images/bp7.1.a.jpg" width=700>
 			<pre>
 :time a qb:DimensionProperty;
         rdfs:subPropertyOf  sdmx-dimension:refPeriod;
@@ -702,7 +702,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		</aside>
     <p><u>BP7.1b: In case you need to describe a period of time then define a new dimension that is also sub-property of sdmx-dimension:refPeriod and set as rdfs:range the interval:Interval</u> (reference.data.gov.uk uses Intervals to define years). However if reference.data.gov.uk   is not sufficient, then a code lists can also be used (see BP9).</p>
     <aside class="example">
-			<img src="images/bp7.1.b.jpg" width=800>
+			<img src="images/bp7.1.b.jpg" width=700>
 			<pre>
 :time a qb:DimensionProperty;
         rdfs:subPropertyOf  sdmx-dimension:refPeriod;
@@ -713,7 +713,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		</aside>
     <p><u>BP7.2 (Applies to geography and age): Define a new dimension that is also sub-property of the sdmx-dimension:refArea or sdmx-dimension:age respectively. Define the rdfs:range and/or qb:codeList of this dimension (see BP6). If a code list or reference dataset that covers the modeling needs exists, then it should be re-used. Otherwise a new code list should be created (see BP9).</u></p>
     <aside class="example">
-			<img src="images/bp7.2.jpg" width=800>
+			<img src="images/bp7.2.jpg" width=700>
 			<pre>
 :geo a qb:DimensionProperty;
        rdfs:subPropertyOf  sdmx-dimension:refArea;
@@ -785,7 +785,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
     <p>The selection of the properties to represent generalization/specialization relations and levels may lead to synonym conflicts since different properties can be used for the same purpose. At linked statistical data the following approaches exist to represent hierarchical code lists:</p>
 	<p><u>Use SKOS vocabulary.</u> This approach defines only generalization/specialization relations i.e. skos:broader and skos:narrower between skos:Concepts.</p>
 	<aside class="example">
-			<img src="images/bp9.2_eg1.jpg" width=400>
+			<img src="images/bp9.2_eg1.jpg" width=350>
 			<pre>
 :Belgium  a skos:Concept.
 :Brussels a skos:Concept;
@@ -901,7 +901,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		<h4 class="subhead" id="ch-3alt" resource="#ch-3alt"><span property="xhv:role"</span></h4>
     <p><u>Alternative 1: Publish multiple cubes with one unit and define the unit at the qb:DataSet.</u> For example:</p>
     <aside class="example">
-			<img src="images/bp3.1alt.jpg" width=800>
+			<img src="images/bp3.1alt.jpg" width=900>
 			<pre>
  :unemployment a qb:MeasureProperty.
  :dsd1 a qb:DataStructureDefinition;
