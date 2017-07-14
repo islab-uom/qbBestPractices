@@ -55,8 +55,7 @@
 <p>This document presents a set of best practices for publishing statistics on the Web following the linked data principles. These practices aim at supporting data publishers
 to model their data and to apply common linked data standards. The wide adoption of such practices can increase interoperability among portals of statistical data 
 on the Web, and thus facilitate the integration of relevant datasets as well as the development of generic software tools that can be reused across different datasets.
-
-  </p>
+</p>
 
 <h2 id="status">Status of this Document</h2>
 
@@ -65,9 +64,9 @@ It describes the results of a research work conducted by CERTH in the course of 
 
 <p>The approach that was followed comprises two steps:
 <ul> 
-<li>an analysis of official linked statistical data portals (i.e. the <a target="_blank" href="http://statistics.gov.scot">Scottish Government portal</a>, the <a target="_blank" href="http://opendatacommunities.org">DCLG portal</a>, the <a target="_blank" href="http://digital-agenda-data.eu/data">European Commission's Digital Agenda portal</a>, the <a target="_blank" href="http://datiopen.istat.it">ISTAT portal</a>,and the <a target="_blank" href="http://data.cso.ie"> the Irish CSO portal</a>) to identify conflicting publishing approaches, and </li>
-<li>the involvement of experts to provide their feedback and contribute to the comprehension of the publishing approaches as well as to the definition of the best practices. Towards 
-this direction the Delphi method was employed using a questionnaire with multiple iterations to collect feedback until a stability in the responses was attained </li>
+	<li>an analysis of official linked statistical data portals (i.e. the <a target="_blank" href="http://statistics.gov.scot">Scottish Government portal</a>, the <a target="_blank" href="http://opendatacommunities.org">DCLG portal</a>, the <a target="_blank" href="http://digital-agenda-data.eu/data">European Commission's Digital Agenda portal</a>, the <a target="_blank" href="http://datiopen.istat.it">ISTAT portal</a>,and the <a target="_blank" href="http://data.cso.ie"> the Irish CSO portal</a>) to identify conflicting publishing approaches, and </li>
+	<li>the involvement of experts to provide their feedback and contribute to the comprehension of the publishing approaches as well as to the definition of the best practices. Towards 
+		this direction the Delphi method was employed using a questionnaire with multiple iterations to collect feedback until a stability in the responses was attained </li>
 </ul>
 
 The best practices described in this document have been categorised into nine categories based on the main decision that a data publisher should make about the way that they model their data and apply relevant linked data standards. 
@@ -76,8 +75,7 @@ is presented as the most promising approach among all the alternatives. We shoul
 
  </p>
 
-<p>
-Comments are very welcome, please send them to the authors.</p>
+<p>Comments are very welcome, please send them to the authors.</p>
 
 <h2 id="contents">Table of Contents</h2>
 <ol id="toc">
@@ -87,9 +85,7 @@ Comments are very welcome, please send them to the authors.</p>
   <li><a href="#namespaces">Namespaces</a> </li>
   <li><a href="#bpsummary">Best practice summary</a> </li>
   <li><a href="#runningexample">Running example</a> </li>  
-  <li><a href="#bestpractices">Best practices</a> </li>  
-  
-  
+  <li><a href="#bestpractices">Best practices</a> </li>    
 </ol>
 
 <h3>Appendices</h3>
@@ -152,7 +148,7 @@ that can be reused across different portals. </p>
 		<tr>
           <td>xkos</td>
           <td>http://rdf-vocabulary.ddialliance.org/xkos#</td>
-          <td><a href="#bib-XKOS-PRIMER">Extended Knowledge Organization System</a></td>
+          <td><a href="#bib-XKOS">Extended Knowledge Organization System</a></td>
         </tr>
 		<tr>
           <td>year</td>
@@ -231,7 +227,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			<img src="images/bp1_eg1.jpg" width=500>
 			<pre>
  :dsd a qb:DataStructureDefinition;
-       qb:component [qb:measure sdmx-measure:obsValue]
+        qb:component [qb:measure sdmx-measure:obsValue]
 			</pre>			
 		</aside>
 		
@@ -244,9 +240,9 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			<img src="images/bp1_eg2.jpg" width=800>
 			<pre>
 :unemployment a qb:MeasureProperty;	
-                    rdfs:subPropertyOf sdmx-measure:obsValue. 
+                rdfs:subPropertyOf sdmx-measure:obsValue. 
 :dsd a qb:DataStructureDefinition;
-             qb:component [qb:measure :unemployment].
+                qb:component [qb:measure :unemployment].
 			</pre>			
 		</aside>	
     </section>
@@ -262,11 +258,10 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			<pre>
 :unemployment a qb:MeasureProperty. 
 :dsd a qb:DataStructureDefinition;
-              qb:component [qb:measure :unemployment].
+       qb:component [qb:measure :unemployment].
 			</pre>			
 		</aside>	
 	</section>
-	
 	
 	<section class="axioms" typeof="bibo:Chapter" resource="#open-1" property="bibo:hasPart">
 		<h4 class="subhead" id="open-1" resource="#open-1"><span property="xhv:role" resource="xhv:heading">Open issues</span></h4>
@@ -310,23 +305,23 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			<pre>
  :unemployment a qb:MeasureProperty.
  :dsd a qb:DataStructureDefinition;
-         qb:component [qb:attribute  sdmx-attribute:unitMeasure;
-                       qb:componentAttachment qb:DataSet];
-         qb:component [qb:measure  :unemployment].
+        qb:component [qb:attribute  sdmx-attribute:unitMeasure;
+                      qb:componentAttachment qb:DataSet];
+        qb:component [qb:measure  :unemployment].
  :cube a qb:DataSet;
-           qb:structure :dsd;
-         <b>sdmx-attribute:unitMeasure qudt:Percent.</b> 
+        qb:structure :dsd;
+     <b>sdmx-attribute:unitMeasure qudt:Percent.</b> 
 			</pre>			
 		</aside>
     <p><u>Define the unit at the qb:MeasureProperty.</u> In this case the querying of available units is also facilitated since units can be identified directly from the structure. Moreover, multiple units can be assigned at a cube. However, different qb:MeasureProperty should be defined for different units although they represent the same measure, thus hindering interoperability e.g. two separate qb:MeasureProperty should be defined for unemployment, one assigned to percentage and another assigned to the absolute number. In this case qb:Observations cannot easily be re-used at another context, because they do not contain all the relevant information i.e. the unit is missing.</p>
     <aside class="example">
 			<pre>
  :unemploymentPerc a qb:MeasureProperty;
-            <b>sdmx-attribute:unitMeasure qudt:Percent.</b>
+     <b>sdmx-attribute:unitMeasure qudt:Percent.</b>
  :dsd a qb:DataStructureDefinition;
-         qb:component [qb:attribute  sdmx-attribute:unitMeasure;
-                       qb:componentAttachment qb:MeasureProperty];
-         qb:component [qb:measure  :unemploymentPerc].
+        qb:component [qb:attribute  sdmx-attribute:unitMeasure;
+                      qb:componentAttachment qb:MeasureProperty];
+        qb:component [qb:measure  :unemploymentPerc].
 			</pre>			
 		</aside>
     <p><u>Define the unit at the qb:Observation.</u> In this case multiple units can be assigned to a cube and there is no need to define different qb:MeasureProperty for different units. Moreover, qb:Observations can be re-used at another context since they contain all relevant information. However, the querying of the available units is not efficient because the query should iterate over all qb:Observation.</p>
@@ -334,14 +329,14 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			<pre>
  :unemployment a qb:MeasureProperty.
  :dsd a qb:DataStructureDefinition;
-                qb:component [qb:attribute  sdmx-attribute:unitMeasure];
-                qb:component [qb:measure  :unemployment].
+         qb:component [qb:attribute  sdmx-attribute:unitMeasure];
+         qb:component [qb:measure  :unemployment].
  :cube a qb:DataSet;
-                qb:structure :dsd.
+         qb:structure :dsd.
  :obs1 a qb:Observation;
-                qb:dataset :cube.
-                unemployment: "16.8"^^xsd:decimal;
-             <b>sdmx-attribute:unitMeasure qudt:Percent.</b>
+         qb:dataset :cube.
+         unemployment: "16.8"^^xsd:decimal;
+      <b>sdmx-attribute:unitMeasure qudt:Percent.</b>
 			</pre>			
 		</aside>
     <p>Comparison matrix of the levels to define the unit:</p>
@@ -408,15 +403,14 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			<pre>
  :unemployment a qb:MeasureProperty. 
  :dsd a qb:DataStructureDefinition;
-                  qb:component [qb:attribute sdmx-attribute:unitMeasure];
-                  qb:component [qb:measure :unemployment].
+         qb:component [qb:attribute sdmx-attribute:unitMeasure];
+         qb:component [qb:measure :unemployment].
  :cube a qb:DataSet;
-                  qb:structure :dsd.
+         qb:structure :dsd.
  :obs1 a qb:Observation;
-                  qb:dataset :cube.
-                  :unemployment "16.8"^^xsd:decimal;
-                  sdmx-attribute:unitMeasure qudt:Percent.
-
+         qb:dataset :cube.
+         :unemployment "16.8"^^xsd:decimal;
+         sdmx-attribute:unitMeasure qudt:Percent.
 			</pre>			
 		</aside>	
 	</section>
@@ -447,18 +441,18 @@ John works for the National Statistical Institute of Belgium and is in charge of
 			<pre>
  :unemployment a qb:MeasureProperty. 
  :dsd a qb:DataStructureDefinition;
-                  qb:component [qb:attribute sdmx-attribute:unitMeasure];
-                  qb:component [qb:measure :unemployment].
+         qb:component [qb:attribute sdmx-attribute:unitMeasure];
+         qb:component [qb:measure :unemployment].
  :cube a qb:DataSet;
-                  qb:structure :dsd.
+         qb:structure :dsd.
  :obs1 a qb:Observation;
-                  qb:dataset :cube.
-                  :unemployment "16.8"^^xsd:decimal;
-                  sdmx-attribute:unitMeasure qudt:Percent.
+         qb:dataset :cube.
+         :unemployment "16.8"^^xsd:decimal;
+         sdmx-attribute:unitMeasure qudt:Percent.
  :obs2 a qb:Observation;
-                  qb:dataset :cube;
-                  :unemployment  "89600"^^xsd:int;                                                       
-                  sdmx-attribute:unitMeasure qudt:Person.
+         qb:dataset :cube;
+         :unemployment  "89600"^^xsd:int;                                                       
+         sdmx-attribute:unitMeasure qudt:Person.
 			</pre>			
 		</aside>
     <p>See the appendix for other alternatives that address the same challenge.</p>  
@@ -486,15 +480,14 @@ John works for the National Statistical Institute of Belgium and is in charge of
  :unemployment a qb:MeasureProperty. 
  :poverty a qb:MeasureProperty. 
  :dsd a qb:DataStructureDefinition;
-                qb:component [qb:measure :unempolyment];
-                qb:component [qb:measure :poverty].
+         qb:component [qb:measure :unempolyment];
+         qb:component [qb:measure :poverty].
  :cube a qb:DataSet;
-                qb:structure :dsd.
+         qb:structure :dsd.
  :obs1 a qb:Observation;
-                qb:dataset :cube.
-                :unemployment "89600"^^xsd:int;
-                :poverty "153000"^^xsd:int. 
-
+         qb:dataset :cube.
+         :unemployment "89600"^^xsd:int;
+         :poverty "153000"^^xsd:int. 
 			</pre>			
 		</aside>
     <p><u>Measure dimension:</u> Define multiple qb:MeasureProperty at the data structure definition, but restrict observations to having a single measure. This is achieved by defining an extra dimension, the qb:measureType, to denote which particular qb:MeasureProperty is included at the qb:Observation. The use of a single measure at observations produces a large number of observations, thus increasing the size of the produced cube. However, this practice enables the definition of multiple units and multiple measures.</p>
@@ -503,19 +496,19 @@ John works for the National Statistical Institute of Belgium and is in charge of
   :unemployment a qb:MeasureProperty. 
   :poverty a qb:MeasureProperty. 
   :dsd a qb:DataStructureDefinition;
-            qb:component [qb:measure :unempolyment];
-            qb:component [qb:measure :poverty];
-            qb:component [qb:dimension qb:measureType].
+          qb:component [qb:measure :unempolyment];
+          qb:component [qb:measure :poverty];
+          qb:component [qb:dimension qb:measureType].
   :cube a qb:DataSet;
-            qb:structure :dsd.
+          qb:structure :dsd.
   :obs1 a qb:Observation;
-            qb:dataset :cube.
-            :unemployment "89600"^^xsd:int;
-            qb:measureType :unemployment. 
+          qb:dataset :cube.
+          :unemployment "89600"^^xsd:int;
+          qb:measureType :unemployment. 
   :obs2 a qb:Observation;
-            qb:dataset :cube.
-            :poverty "153000"^^xsd:int;
-            qb:measureProperty :poverty.
+          qb:dataset :cube.
+          :poverty "153000"^^xsd:int;
+          qb:measureProperty :poverty.
 			</pre>			
 		</aside>
     <p>Comparison matrix of the practices to represent multiple measures:</p>
@@ -552,30 +545,30 @@ John works for the National Statistical Institute of Belgium and is in charge of
   <aside class="example">
 			<img src="images/bp4.jpg" width=800>
 			<pre>
- :unemployment a qb:MeasureProperty. 
- :poverty a qb:MeasureProperty. 
- :dsd a qb:DataStructureDefinition;
-                  qb:component [qb:measure :unemployment];
-                  qb:component [qb:measure :poverty];
-                  qb:component [qb:dimension qb:measureType]
-                  qb:component [qb:attribute sdmx-attribute:unitMeasure].
- :cube a qb:DataSet;
-                  qb:structure :dsd.
- :obs1 a qb:Observation;
-                  qb:dataset :cube.
-                  :unemployment "16.8"^^xsd:decimal;
-                  qb:measureType :unemployment;
-                  sdmx-attribute:unitMeasure qudt:Percent.
- :obs2 a qb:Observation;
-                  qb:dataset :cube;
-                  :unemployment  "89600"^^xsd:int;    
-                  qb:measureType :unemployment;
-                  sdmx-attribute:unitMeasure qudt:Person.
- :obs3 a qb:Observation;
-                  qb:dataset :cube;
-                  :poverty  "153000"^^xsd:int;    
-                  qb:measureType:poverty;
-                  sdmx-attribute:unitMeasure qudt:Person.
+:unemployment a qb:MeasureProperty. 
+:poverty a qb:MeasureProperty. 
+:dsd a qb:DataStructureDefinition;
+        qb:component [qb:measure :unemployment];
+        qb:component [qb:measure :poverty];
+        qb:component [qb:dimension qb:measureType]
+        qb:component [qb:attribute sdmx-attribute:unitMeasure].
+:cube a qb:DataSet;
+        qb:structure :dsd.
+:obs1 a qb:Observation;
+        qb:dataset :cube.
+        :unemployment "16.8"^^xsd:decimal;
+        qb:measureType :unemployment;
+        sdmx-attribute:unitMeasure qudt:Percent.
+:obs2 a qb:Observation;
+        qb:dataset :cube;
+        :unemployment  "89600"^^xsd:int;    
+        qb:measureType :unemployment;
+        sdmx-attribute:unitMeasure qudt:Person.
+:obs3 a qb:Observation;
+        qb:dataset :cube;
+        :poverty  "153000"^^xsd:int;    
+        qb:measureType:poverty;
+        sdmx-attribute:unitMeasure qudt:Person.
 			</pre>			
 		</aside>
 	</section>
@@ -607,18 +600,18 @@ John works for the National Statistical Institute of Belgium and is in charge of
   <aside class="example">
 			<img src="images/bp5.1.jpg" width=800>
 			<pre>
- :geo a qb:DimensionProperty;
-      rdfs:subPropertyOf  sdmx-dimension:refArea.
- :dsd a qb:DataStructureDefinition;
-      qb:component [qb:dimension :geo].
+:geo a qb:DimensionProperty;
+       rdfs:subPropertyOf  sdmx-dimension:refArea.
+:dsd a qb:DataStructureDefinition;
+       qb:component [qb:dimension :geo].
 			</pre>			
 		</aside>
     <p><u>BP5.2 (Applies to gender): Re-use the sdmx-dimension:sex when the associated code list covers the modeling needs. If it does not cover the modeling needs, then define a new dimension and its valid potential values (see BP6 and BP7)</u></p>
     <aside class="example">
 			<img src="images/bp5.2.jpg" width=800>
 			<pre>
- :dsd a qb:DataStructureDefinition;
-      qb:component [qb:dimension sdmx-dimension:sex].
+:dsd a qb:DataStructureDefinition;
+       qb:component [qb:dimension sdmx-dimension:sex].
 			</pre>			
 		</aside>  
 	</section>
@@ -644,21 +637,21 @@ John works for the National Statistical Institute of Belgium and is in charge of
   <aside class="example">
 			<img src="images/bp6.1.jpg" width=800>
 			<pre>
-  :d a qb:DimensionProperty;
-        rdfs:range xsd:dateTime.
-  :dsd a qb:DataStructureDefinition;
-        qb:component [qb:dimension :d].
+:d a qb:DimensionProperty;
+       rdfs:range xsd:dateTime.
+:dsd a qb:DataStructureDefinition;
+       qb:component [qb:dimension :d].
 			</pre>			
 		</aside>
     <p><u>BP6.2: Define the qb:codeList of a qb:DimensionProperty when the code list is modeled as skos:ConceptScheme or skos:Collection  or  qb:HierarchicalCodeList.</u> In this case define the rdfs:range as skos:Concept. (for the way to define a new code list see BP9)</p>
     <aside class="example">
 			<img src="images/bp6.2.jpg" width=800>
 			<pre>
-  :d a qb:DimensionProperty;
-          rdfs:range skos:Concept;
-          qb:codeList :cl.
-  :dsd a qb:DataStructureDefinition;
-          qb:component [qb:dimension :d].
+:d a qb:DimensionProperty;
+       rdfs:range skos:Concept;
+       qb:codeList :cl.
+:dsd a qb:DataStructureDefinition;
+       qb:component [qb:dimension :d].
 			</pre>			
 		</aside>  
 	</section>
@@ -700,34 +693,34 @@ John works for the National Statistical Institute of Belgium and is in charge of
   <aside class="example">
 			<img src="images/bp7.1.a.jpg" width=800>
 			<pre>
-  :time a qb:DimensionProperty;
-          rdfs:subPropertyOf  sdmx-dimension:refPeriod;
-          rdfs:range xsd:dateTime.
-  :dsd a qb:DataStructureDefinition;
-          qb:component [qb:dimension :time].
+:time a qb:DimensionProperty;
+        rdfs:subPropertyOf  sdmx-dimension:refPeriod;
+        rdfs:range xsd:dateTime.
+:dsd a qb:DataStructureDefinition;
+        qb:component [qb:dimension :time].
 			</pre>			
 		</aside>
     <p><u>BP7.1b: In case you need to describe a period of time then define a new dimension that is also sub-property of sdmx-dimension:refPeriod and set as rdfs:range the interval:Interval</u> (reference.data.gov.uk uses Intervals to define years). However if reference.data.gov.uk   is not sufficient, then a code lists can also be used (see BP9).</p>
     <aside class="example">
 			<img src="images/bp7.1.b.jpg" width=800>
 			<pre>
-  :time a qb:DimensionProperty;
-          rdfs:subPropertyOf  sdmx-dimension:refPeriod;
-          rdfs:range interval:Interval.   
-  :dsd a qb:DataStructureDefinition;
-          qb:component [qb:dimension :time].
+:time a qb:DimensionProperty;
+        rdfs:subPropertyOf  sdmx-dimension:refPeriod;
+        rdfs:range interval:Interval.   
+:dsd a qb:DataStructureDefinition;
+        qb:component [qb:dimension :time].
 			</pre>			
 		</aside>
     <p><u>BP7.2 (Applies to geography and age): Define a new dimension that is also sub-property of the sdmx-dimension:refArea or sdmx-dimension:age respectively. Define the rdfs:range and/or qb:codeList of this dimension (see BP6). If a code list or reference dataset that covers the modeling needs exists, then it should be re-used. Otherwise a new code list should be created (see BP9).</u></p>
     <aside class="example">
 			<img src="images/bp7.2.jpg" width=800>
 			<pre>
-  :geo a qb:DimensionProperty;
-         rdfs:subPropertyOf  sdmx-dimension:refArea;
-         qb:codeList :BEgeo;
-         rdfs:range skos:Concept.   
-  :dsd a qb:DataStructureDefinition;
-         qb:component [qb:dimension :geo].
+:geo a qb:DimensionProperty;
+       rdfs:subPropertyOf  sdmx-dimension:refArea;
+       qb:codeList :BEgeo;
+       rdfs:range skos:Concept.   
+:dsd a qb:DataStructureDefinition;
+       qb:component [qb:dimension :geo].
 			</pre>			
 		</aside>    
 	</section>
@@ -774,8 +767,6 @@ John works for the National Statistical Institute of Belgium and is in charge of
 </div>
 <!-- END BP8 -->
 
-
-
 <!-- BP9 -->
 <div class="practice">
 	<p><span id="definingCodeLists" class="practicelab">BP9: Defining code lists</span></p>
@@ -796,7 +787,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 	<aside class="example">
 			<img src="images/bp9.2_eg1.jpg" width=400>
 			<pre>
-:Belgium a skos:Concept.
+:Belgium  a skos:Concept.
 :Brussels a skos:Concept;
             skos:broader :Belgium.
 :Wallonne a skos:Concept;
@@ -807,16 +798,16 @@ John works for the National Statistical Institute of Belgium and is in charge of
 	<aside class="example">
 		<img src="images/bp9.2_eg2.jpg" width=700>
 		<pre>
-:Belgium a skos:Concept.
+:Belgium  a skos:Concept.
 :Brussels a skos:Concept;
             xkos:isPartOf :Belgium.
 :Wallonne a skos:Concept;
             xkos:isPartOf :Belgium.
-:Country a xkos:ClassificationLevel;
-           skos:member : Belgium.
-:Region a xkos:ClassificationLevel;
-           skos:member :Brussels;
-           skos:member :Wallonne.
+:Country  a xkos:ClassificationLevel;
+            skos:member : Belgium.
+:Region   a xkos:ClassificationLevel;
+            skos:member :Brussels;
+            skos:member :Wallonne.
 			</pre>
 	</aside>
 	
@@ -881,42 +872,32 @@ John works for the National Statistical Institute of Belgium and is in charge of
   <aside class="example">
 			<img src="images/bp9.1.jpg" width=900>
 <pre>
-:15-24    a skos:Concept.
-:25-34    a skos:Concept.
-:Brussels a skos:Concept.
-:Wallone  a skos:Concept.
-:AgeList  a skos:ConceptScheme;
-           skos:hasTopConcept :15-24;
-           skos:hasTopConcept :25-34.
-:BEgeo a  skos:ConceptScheme;
-          skos:hasTopConcept :Brussels;
-          skos:hasTopConcept :Wallone.
-</pre>
-			
+:15-24    a  skos:Concept.
+:25-34    a  skos:Concept.
+:Brussels a  skos:Concept.
+:Wallone  a  skos:Concept.
+:AgeList  a  skos:ConceptScheme;
+             skos:hasTopConcept :15-24;
+             skos:hasTopConcept :25-34.
+:BEgeo    a  skos:ConceptScheme;
+             skos:hasTopConcept :Brussels;
+             skos:hasTopConcept :Wallone.
+</pre>			
 		</aside>
 	<p><u>BP9.2: In the case of hierarchical data always use hierarchies to describe them. SKOS should be preferred when the hierarchies are simple. In the case where levels are fully separated and a depth is a meaningful concept then XKOS is appropriate. Finally, when there is a need to express more relations not covered by SKOS or XKOS (e.g. administeredBy vs within) then QB vocabulary should be preferred.</u></p>
     <p><u>BP9.3: Always define total values for the dimensions (where applicable). Define them at the top a hierarchy (see BP9.2)</u></p>
-
-		
-		
 	</section>
 </div>
 <!-- END BP9 -->
 
 
-
-
-
-
-
 <div class="back">
 
-
 <h2 id="alternatives">A Alternative practices</h2>
-<!-- BP3 -->
+<!-- BP3 alt -->
 <div class="practice">
 	<p><span id="DefiningMultipleUnitsPerMeasure" class="practicelab">BP3: Defining multiple units per measure</span></p>
-    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-3" property="bibo:hasPart">
+    <section class="axioms" typeof="bibo:Chapter" resource="#challenge-3alt" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-3alt" resource="#ch-3alt"><span property="xhv:role"</span></h4>
     <p><u>Alternative 1: Publish multiple cubes with one unit and define the unit at the qb:DataSet.</u> For example:</p>
     <aside class="example">
@@ -925,8 +906,8 @@ John works for the National Statistical Institute of Belgium and is in charge of
  :unemployment a qb:MeasureProperty.
  :dsd1 a qb:DataStructureDefinition;
            qb:component [qb:attribute  sdmx-attribute:unitMeasure;
-                        qb:componentAttachment qb:DataSet];
-          qb:component [qb:measure  :unemployment].
+                         qb:componentAttachment qb:DataSet];
+           qb:component [qb:measure  :unemployment].
  :cube1 a qb:DataSet;
            qb:structure :dsd1;
            sdmx-attribute:unitMeasure qudt:Percent.
@@ -969,7 +950,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		</aside> 
 	</section>
 </div>
-<!-- END BP3 -->
+<!-- END BP3 alt-->
 <h2 id="changes">B Changes in this version (Non-Normative)</h2>
 <ul>
   <li><p>changelog</p>
@@ -989,15 +970,38 @@ John works for the National Statistical Institute of Belgium and is in charge of
       </h3>
       <dl class="bibliography" resource="">
 
+	    <dt id="bib-QB-VOC">[QB-VOC]</dt>
+        <dd>Richard Cyganiak; Dave Reynolds. W3C. <a href="https://www.w3.org/TR/vocab-data-cube/" property="dc:references"><cite>The RDF Data Cube Vocabulary</cite></a>. 16 January 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/vocab-data-cube/" property="dc:references">https://www.w3.org/TR/vocab-data-cube/</a>
+        </dd>
+		<dt id="bib-QUDT-UNITS">[QUDT]</dt>
+        <dd>QUDT <a href="http://www.linkedmodel.org/catalog/qudt/1.1" property="dc:references"><cite>QUDT units vocabulary</cite></a>. URL: <a href="http://www.linkedmodel.org/catalog/qudt/1.1" property="dc:references">http://www.linkedmodel.org/catalog/qudt/1.1</a>
+        </dd>
+		<dt id="bib-REFERENCE-DATAGOVUK">[REFERENCE-DATAGOVUK]</dt>
+        <dd>UK government. <a href="http://reference.data.gov.uk/" property="dc:references"><cite>Reference data from the UK Government.</cite></a>. URL: <a href="http://reference.data.gov.uk/" property="dc:references">http://reference.data.gov.uk/</a>
+        </dd>
 		<dt id="bib-RDF-SCHEMA">[RDF-SCHEMA]</dt>
         <dd>Dan Brickley; Ramanathan Guha. W3C. <a href="https://www.w3.org/TR/rdf-schema/" property="dc:references"><cite>RDF Schema 1.1</cite></a>. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf-schema/" property="dc:references">https://www.w3.org/TR/rdf-schema/</a>
         </dd>
         <dt id="bib-SKOS-PRIMER">[SKOS-PRIMER]</dt>
         <dd>Antoine Isaac; Ed Summers. W3C. <a href="https://www.w3.org/TR/skos-primer/" property="dc:references"><cite>SKOS Simple Knowledge Organization System Primer</cite></a>. 18 August 2009. W3C Note. URL: <a href="https://www.w3.org/TR/skos-primer/" property="dc:references">https://www.w3.org/TR/skos-primer/</a>
         </dd>
+		<dt id="bib-XKOS">[XKOS]</dt>
+        <dd>Franck Cotton. <a href="http://rdf-vocabulary.ddialliance.org/xkos" property="dc:references"><cite>XKOS: An SKOS extension for representing statistical classifications</cite></a>. 18 January 2017. Unofficial Draft. URL: <a href="http://rdf-vocabulary.ddialliance.org/xkos" property="dc:references">http://rdf-vocabulary.ddialliance.org/xkos</a>
+        </dd>
 </dl>
     </section>
   </section>
+  
+  
+
+		
+		<tr>
+          <td>year</td>
+          <td>http://reference.data.gov.uk/id/year/</td>
+          <td><a href="#bib-REFERENCE-DATAGOVUK">reference.data.gov.uk time intervals</a></td>
+        </tr>
+	
+  
         
         
 </body>
