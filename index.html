@@ -816,15 +816,13 @@ John works for the National Statistical Institute of Belgium and is in charge of
 		<img src="images/bp9.2_eg3.jpg" width=900>
 		<pre>
 :BEgeo a qb:HierarchicalCodelist;
-            qb:parentChildProperty :within;
-            qb:hierarchyRoot :Belgium;
-            qb:hierarchyRoot :Brussels;
-            qb:hierarchyRoot :Wallone.
-:Belgium a skos:Concept.
-:Brussels a skos:Concept;
-            :within :Begium.
-:Wallonne a skos:Concept;
-            :within :Begium.
+            qb:parentChildProperty :contains;
+            qb:hierarchyRoot :Belgium.            
+:Belgium a skos:Concept;
+           :contains :Brussels;
+           :contains :Wallonne.		   
+:Brussels a skos:Concept.
+:Wallonne a skos:Concept.
 			</pre>
 	</aside>
 	<p>Sometimes, case-specific properties are exploited to express hierarchies. This approach enables the definition of generalization/specialization relations not covered by SKOS and XKOS (e.g. administeredBy vs within). However, without using any standard vocabulary the  interpretation of the data is not always self descriptive.</p>
