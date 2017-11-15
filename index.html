@@ -337,7 +337,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
  :cube a qb:DataSet;
          qb:structure :dsd.
  :obs1 a qb:Observation;
-         qb:dataset :cube.
+         qb:dataset :cube;
          unemployment: "16.8"^^xsd:decimal;
       <b>sdmx-attribute:unitMeasure qudt:Percent.</b>
 			</pre>			
@@ -488,7 +488,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
  :cube a qb:DataSet;
          qb:structure :dsd.
  :obs1 a qb:Observation;
-         qb:dataset :cube.
+         qb:dataset :cube;
          :unemployment "89600"^^xsd:int;
          :poverty "153000"^^xsd:int. 
 			</pre>			
@@ -505,11 +505,11 @@ John works for the National Statistical Institute of Belgium and is in charge of
   :cube a qb:DataSet;
           qb:structure :dsd.
   :obs1 a qb:Observation;
-          qb:dataset :cube.
+          qb:dataset :cube;
           :unemployment "89600"^^xsd:int;
           qb:measureType :unemployment. 
   :obs2 a qb:Observation;
-          qb:dataset :cube.
+          qb:dataset :cube;
           :poverty "153000"^^xsd:int;
           qb:measureProperty :poverty.
 			</pre>			
@@ -553,7 +553,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 :dsd a qb:DataStructureDefinition;
         qb:component [qb:measure :unemployment];
         qb:component [qb:measure :poverty];
-        qb:component [qb:dimension qb:measureType]
+        qb:component [qb:dimension qb:measureType];
         qb:component [qb:attribute sdmx-attribute:unitMeasure].
 :cube a qb:DataSet;
         qb:structure :dsd.
