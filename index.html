@@ -207,7 +207,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-1" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-1" resource="#ch-1"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
 		<p>The cube measure represents the phenomenon being observed (e.g. unemployment). At the QB vocabulary measures are RDF properties
-		of qb:MeasureProperty type, they are defined at the cube structure (qb:DataStructureDefinition) and are used to assign			numerical values at the observations (e.g. unemployment = 7.8%). The selection of the measure property may lead into two
+		of qb:MeasureProperty type, they are defined at the cube structure (qb:DataStructureDefinition) and are used to assign numerical values to the observations (e.g. unemployment = 7.8%). The selection of the measure property may lead into two
 			types of conflicts:</p>
 		<ul>
 			<li>Homonym conflicts appear when the same measure property is used to represent different measures. 
@@ -290,7 +290,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
     </section>
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-2.2" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-2.2" resource="#ch-2.2"><span property="xhv:role" resource="xhv:heading">Challenge 2.2</span></h4>
-    <p>At the QB vocabulary, units can be modeled as RDF properties of qb:AttributeProperty type that are defined at the cube structure (qb:DataStructureDefinition). The selection of the unit property may lead to synonym conflicts since different properties can be used for the same purpose. A common practice to address this challenge is to re-use sdmx-attribute:unitMeasure property. In practice however, new properties are defined as sub-properties of sdmx-attribute:unitMeasure hindering this way interoperability. For example, many existing portal follow this approach: </p>
+    <p>At the QB vocabulary, units can be modeled as RDF properties of qb:AttributeProperty type that are defined at the cube structure (qb:DataStructureDefinition). The selection of the unit property may lead to synonym conflicts since different properties can be used for the same purpose. A common practice to address this challenge is to re-use sdmx-attribute:unitMeasure property. In practice however, new properties are defined as sub-properties of sdmx-attribute:unitMeasure hindering this way interoperability. For example, many existing portals follow this approach: </p>
 		<aside class="example">
 			<pre>
  :unit a qb:AttributeProperty;
@@ -593,7 +593,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-5" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-5" resource="#ch-5"><span property="xhv:role" resource="xhv:heading">Challenge</span></h4>
     <p>Dimensions (e.g. geography, time) provide contextual information for the measures of the cube. At the QB vocabulary, dimensions are RDF properties of qb:DimensionProperty type and are defined at the cube structure (qb:DataStructureDefinition). The selection of the RDF property to represent a dimension may lead to synonym conflicts since different properties can be used for the same purpose. A common practice to address this challenge is to re-use dimensions defined by the linked data version of SDMX (e.g. sdmx-dimension:refArea)</p>
-    <p>The time, geography, age and gender dimensions are very common at statistical data, thus the linked data version of SDMX has already defined qb:DimensionProperties to express them i.e. sdmx-dimension:refPeriod, sdmx-dimension:refArea, sdmx-dimension:age and sdmx-dimension:sex. These SDMX dimensions are not associated with the valid potential values (i.e. code list or range). A special case is the sdmx-dimension:sex dimension because a code list has already been defined and associated with the dimension.</p>
+    <p>The time, geography, age and gender dimensions are very common at statistical data, thus the linked data version of SDMX has already defined qb:DimensionProperty to express them i.e. sdmx-dimension:refPeriod, sdmx-dimension:refArea, sdmx-dimension:age and sdmx-dimension:sex. These SDMX dimensions are not associated with the valid potential values (i.e. code list or range). A special case is the sdmx-dimension:sex dimension because a code list has already been defined and associated with the dimension.</p>
     <p>In practice however, new dimensions are defined as sub-properties of the SDMX dimensions hindering this way interoperability. An advantage of this approach is the fact that it enables the addition of extra annotation to the dimensions (e.g. label, code list, range).</p>
     </section>
 	
@@ -672,7 +672,7 @@ John works for the National Statistical Institute of Belgium and is in charge of
 
     <section class="axioms" typeof="bibo:Chapter" resource="#challenge-7.1" property="bibo:hasPart">
 		<h4 class="subhead" id="ch-7.1" resource="#ch-7.1"><span property="xhv:role" resource="xhv:heading">Challenge 7.1</span></h4>
-    <p>The values of time dimension can be either periods of time (e.g. 2016) or specific points in time (e.g. 01/01/2016) and thus can be represented either as URIs (e.g. http://reference.data.gov.uk/id/year/2016) or as data-types (e.g. ``2016-01-01"^^xsd:date). The selection of the approach to represent the time values may lead to synonym conflicts since different values can be used for the same purpose. Four approaches are commonly used to express the time values:</p>
+    <p>The values of time dimension can be either periods of time (e.g. 2016) or specific points in time (e.g. 01/01/2016) and thus can be represented either as URIs (e.g. http://reference.data.gov.uk/id/year/2016) or as data-types (e.g. "2016-01-01"^^xsd:date). The selection of the approach to represent the time values may lead to synonym conflicts since different values can be used for the same purpose. Four approaches are commonly used to express the time values:</p>
     <ul>
       <li>Use URIs from reference.data.gov.uk  (most popular at official portals). This reference dataset is not defined as a skos:ConceptScheme.</li>
       <li>Use resources from DBpedia, which are not included in a skos:ConceptScheme</li>
@@ -783,8 +783,8 @@ John works for the National Statistical Institute of Belgium and is in charge of
     </section>
 
 	 <section class="axioms" typeof="bibo:Chapter" resource="#challenge-9.2" property="bibo:hasPart">
-		<h4 class="subhead" id="ch-9.2" resource="#ch-9.2"><span property="xhv:role" resource="xhv:heading">Challenge 9.1</span></h4>
-    <p>It is common code list to include data with a hierarchical structure (e.g. geographical divisions). Thus, they can be represented using hierarchies that consist of generalization/specialization relations (e.g. Brussels isPartOf Belgium) and levels (e.g. country, region, city). In practice however, sometimes the hierarchical data are represented flat in a code list without generalization/specialization relations. </p>
+		<h4 class="subhead" id="ch-9.2" resource="#ch-9.2"><span property="xhv:role" resource="xhv:heading">Challenge 9.2</span></h4>
+    <p>It is common for code lists to include data with a hierarchical structure (e.g. geographical divisions). Thus, they can be represented using hierarchies that consist of generalization/specialization relations (e.g. Brussels isPartOf Belgium) and levels (e.g. country, region, city). In practice however, sometimes the hierarchical data are represented flat in a code list without generalization/specialization relations. </p>
     <p>The selection of the properties to represent generalization/specialization relations and levels may lead to synonym conflicts since different properties can be used for the same purpose. At linked statistical data the following approaches exist to represent hierarchical code lists:</p>
 	<p><u>Use SKOS vocabulary.</u> This approach defines only generalization/specialization relations i.e. skos:broader and skos:narrower between skos:Concepts.</p>
 	<aside class="example">
